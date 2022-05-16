@@ -3,10 +3,10 @@
 #' 
 #' Funcao auxiliar que le arquivo texto e formata como objeto da classe \code{cenariosena}
 #' 
-#' Espera-se um arquivo com formato especifico. As duas primeiras colunas devem conter o indice do 
-#' cenario e bacia correspondente, respectivamente. As demais colunas devem corresponder aos passos
-#' de tempo para os quais os cenarios foram gerados. Por exemplo, um arquivo contendo cinco cenarios 
-#' gerados para 2022-01, 2022-02 e 2022-03 teria a forma
+#' Espera-se um arquivo com formato especifico. As tres primeiras colunas devem conter o indice do 
+#' cenario, bacia e ano de referencia, respectivamente. As demais colunas devem corresponder aos
+#' passos de tempo para os quais os cenarios foram gerados. Por exemplo, um arquivo contendo cinco 
+#' cenarios gerados para 2022-01, 2022-02 e 2022-03 teria a forma
 #' 
 #' | cenario | bacia | anoref | 1/2022 | 2/2022 | 3/2022 |
 #' | ------- | ----- | ------ | ------ | ------ | ------ |
@@ -42,16 +42,18 @@ learqcenarios <- function(arq, pat_data = "%m/%Y") {
     coldata <- as.Date(paste0("01__", colnames(dat)), format = pat_data_2)
     colnames(dat)[!is.na(coldata)] <- as.character(coldata[!is.na(coldata)])
 
+    dat[, cenario := seq(.N), by = c("bacia", "anoref")]
+
     dat <- melt(dat, id.vars = colnames(dat)[is.na(coldata)], value.name = "ena", variable.name = "data")
     dat[, data := as.Date(as.character(data))]
-    setorder(dat, cenario, bacia, data)
+    setorder(dat, bacia, anoref, cenario)
 
     new_cenariosena(dat)
 }
 
 new_cenariosena <- function(dat) {
 
-    out <- list(cenarios = dat[, .SD, .SDcols = c("anoref", "bacia", "data", "ena")])
+    out <- list(cenarios = dat[, .SD, .SDcols = c("anoref", "bacia", "cenario", "data", "ena")])
 
     class(out) <- "cenariosena"
 

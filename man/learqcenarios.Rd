@@ -19,10 +19,10 @@ objeto da classe \code{cenariosena} contendo dados do arquivo lido
 Funcao auxiliar que le arquivo texto e formata como objeto da classe \code{cenariosena}
 }
 \details{
-Espera-se um arquivo com formato especifico. As duas primeiras colunas devem conter o indice do
-cenario e bacia correspondente, respectivamente. As demais colunas devem corresponder aos passos
-de tempo para os quais os cenarios foram gerados. Por exemplo, um arquivo contendo cinco cenarios
-gerados para 2022-01, 2022-02 e 2022-03 teria a forma\tabular{llllll}{
+Espera-se um arquivo com formato especifico. As tres primeiras colunas devem conter o indice do
+cenario, bacia e ano de referencia, respectivamente. As demais colunas devem corresponder aos
+passos de tempo para os quais os cenarios foram gerados. Por exemplo, um arquivo contendo cinco
+cenarios gerados para 2022-01, 2022-02 e 2022-03 teria a forma\tabular{llllll}{
    cenario \tab bacia \tab anoref \tab 1/2022 \tab 2/2022 \tab 3/2022 \cr
    1 \tab SIN \tab AA \tab XXXXXX \tab XXXXXX \tab XXXXXX \cr
    2 \tab SIN \tab AA \tab XXXXXX \tab XXXXXX \tab XXXXXX \cr
