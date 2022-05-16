@@ -9,14 +9,14 @@
 #' cenarios gerados para 2022-01, 2022-02 e 2022-03 teria a forma
 #' 
 #' | cenario | bacia | anoref | 1/2022 | 2/2022 | 3/2022 |
-#' | ------- | ----- | ------ | ------ | ------ | ------ |
-#' | 1       | SIN   | AA     | XXXXXX | XXXXXX | XXXXXX | 
-#' | 2       | SIN   | AA     | XXXXXX | XXXXXX | XXXXXX | 
-#' | 3       | SIN   | AA     | XXXXXX | XXXXXX | XXXXXX |
-#' | 4       | SIN   | AA     | XXXXXX | XXXXXX | XXXXXX |
-#' | 5       | SIN   | AA     | XXXXXX | XXXXXX | XXXXXX |
+#' | :-----: | :---: | :----: | :----: | :----: | :----: |
+#' | 1       | SIN   | AA     | XXXX   | XXXX   | XXXX   | 
+#' | 2       | SIN   | AA     | XXXX   | XXXX   | XXXX   | 
+#' | 3       | SIN   | AA     | XXXX   | XXXX   | XXXX   |
+#' | 4       | SIN   | AA     | XXXX   | XXXX   | XXXX   |
+#' | 5       | SIN   | AA     | XXXX   | XXXX   | XXXX   |
 #' 
-#' XXXXXX e um placeholder para os valores de ena e AA um placeholder para os valores de ano de 
+#' XXXX   e um placeholder para os valores de ena e AA um placeholder para os valores de ano de 
 #' referencia. Nao existe um padrao para os anos, podendo ser qualquer tipo de dado (i.e. "A1", 
 #' "ano_1", 2022 e etc).
 #' 

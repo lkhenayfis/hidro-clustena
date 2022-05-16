@@ -22,17 +22,17 @@ Funcao auxiliar que le arquivo texto e formata como objeto da classe \code{cenar
 Espera-se um arquivo com formato especifico. As tres primeiras colunas devem conter o indice do
 cenario, bacia e ano de referencia, respectivamente. As demais colunas devem corresponder aos
 passos de tempo para os quais os cenarios foram gerados. Por exemplo, um arquivo contendo cinco
-cenarios gerados para 2022-01, 2022-02 e 2022-03 teria a forma\tabular{llllll}{
+cenarios gerados para 2022-01, 2022-02 e 2022-03 teria a forma\tabular{cccccc}{
    cenario \tab bacia \tab anoref \tab 1/2022 \tab 2/2022 \tab 3/2022 \cr
-   1 \tab SIN \tab AA \tab XXXXXX \tab XXXXXX \tab XXXXXX \cr
-   2 \tab SIN \tab AA \tab XXXXXX \tab XXXXXX \tab XXXXXX \cr
-   3 \tab SIN \tab AA \tab XXXXXX \tab XXXXXX \tab XXXXXX \cr
-   4 \tab SIN \tab AA \tab XXXXXX \tab XXXXXX \tab XXXXXX \cr
-   5 \tab SIN \tab AA \tab XXXXXX \tab XXXXXX \tab XXXXXX \cr
+   1 \tab SIN \tab AA \tab XXXX \tab XXXX \tab XXXX \cr
+   2 \tab SIN \tab AA \tab XXXX \tab XXXX \tab XXXX \cr
+   3 \tab SIN \tab AA \tab XXXX \tab XXXX \tab XXXX \cr
+   4 \tab SIN \tab AA \tab XXXX \tab XXXX \tab XXXX \cr
+   5 \tab SIN \tab AA \tab XXXX \tab XXXX \tab XXXX \cr
 }
 
 
-XXXXXX e um placeholder para os valores de ena e AA um placeholder para os valores de ano de
+XXXX   e um placeholder para os valores de ena e AA um placeholder para os valores de ano de
 referencia. Nao existe um padrao para os anos, podendo ser qualquer tipo de dado (i.e. "A1",
 "ano_1", 2022 e etc).
 
