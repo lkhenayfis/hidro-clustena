@@ -1,3 +1,4 @@
+########################## FUNCOES PARA IMPORTACAO E MANIPULACAO DOS DADOS #########################
 
 #' Leitura Do Arquivo De Cenarios
 #' 
@@ -63,4 +64,46 @@ new_cenariosena <- function(dat) {
     attr(out, "ncen")   <- nrow(dat) / with(attributes(out), length(bacias) * length(datas) * length(anos))
 
     return(out)
+}
+
+# METODOS ------------------------------------------------------------------------------------------
+
+#' Subset De \code{cenariosena}
+#' 
+#' Extrai subsets de objetos \code{cenariosena} e adequa os atributios
+#' 
+#' @param x objeto da classe \code{cenariosena}
+#' @param i escalar ou vetor de bacias para extrair do dado
+#' @param j escalar ou vetor de anos de referencia para extrair do dado
+#' @param k escalar ou vetor de datas para extrair do dado
+#' 
+#' @return objecto \code{cenariosena} contendo apenas os valores especificados
+#' 
+#' @export
+
+`[.cenariosena` <- function(x, i, j, k, ...) {
+
+    dat <- copy(x$cenarios)
+
+    if(missing(i)) {
+        i <- attr(x, "bacias")
+    } else if(is.numeric(i)) {
+        i <- attr(x, "bacias")[i]
+    }
+    if(missing(j)) {
+        j <- attr(x, "anos")
+    } else if(is.numeric(j)) {
+        j <- attr(x, "anos")[j]
+    }
+    if(missing(k)) {
+        k <- attr(x, "datas")
+    } else if(is.numeric(k)) {
+        k <- attr(x, "datas")[k]
+    } else {
+        k <- as.Date(k)
+    }
+
+    dat <- dat[(bacia %in% i) & (anoref %in% j) & (data %in% k)]
+
+    new_cenariosena(dat)
 }
