@@ -107,3 +107,21 @@ new_cenariosena <- function(dat) {
 
     new_cenariosena(dat)
 }
+
+#' @export
+
+rbind.cenariosena <- function(..., deparse.level = 1L) {
+    x <- list(...)
+    nx <- length(x)
+
+    if(nx == 1) {
+        return(x[[1]])
+    } else if(nx == 2) {
+        x1 <- x[[1]]$cenarios
+        x2 <- x[[2]]$cenarios
+ 
+        new_cenariosena(rbind(x1, x2))
+    } else if(nx > 2) {
+        rbind(x[[1]], do.call(rbind, x[-1]))
+    }
+}

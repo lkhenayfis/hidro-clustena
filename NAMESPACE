@@ -2,6 +2,7 @@
 
 S3method("[",cenariosena)
 S3method(plot,cenariosena)
+S3method(rbind,cenariosena)
 export(learqcenarios)
 import(data.table)
 importFrom(ggplot2,aes)
