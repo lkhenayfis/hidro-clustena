@@ -4,10 +4,12 @@
 \alias{plot.cenariosena}
 \title{Visualizacao De \code{cenariosena}}
 \usage{
-\method{plot}{cenariosena}(x, ...)
+\method{plot}{cenariosena}(x, print = TRUE, ...)
 }
 \arguments{
 \item{x}{objeto da classe \code{cenariosena}}
+
+\item{print}{booleano indicando se o plot deve ser exibido ou retornado invisivelmente}
 
 \item{...}{nao possui funcao -- existe apenas para consistencia com a generica}
 }
