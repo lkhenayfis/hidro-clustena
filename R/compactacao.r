@@ -1,5 +1,20 @@
 ############################# FUNCOES PARA REDUCAO DE DIMENSIONALIDADE #############################
 
+#' Compactacao Por PCA
+#' 
+#' Reduz dimensionalidade dos cenarios via PCA mantendo um minimo de variacao total
+#' 
+#' A matriz de dados considerada para reducao de dimensionalidade tem em cada linha o cenario e,
+#' em cada coluna, os passos a frente de simulacao. Serao selecionadas as n primeiras componentes 
+#' principais que representem no minimo \code{vartot} por cento da variacao total.
+#' 
+#' @param cenarios objeto da classe \code{cenariosena} contendo apenas uma bacia e ano de referencia
+#' @param vartot percentual em formato decimal de variacao total mininima
+#' 
+#' @return objeto da classe \code{compactcen} contendo o dado em dimensao reduzida
+#' 
+#' @export
+
 PCAena <- function(cenarios, vartot = .8) {
 
     dat <- copy(cenarios$cenarios)
@@ -45,6 +60,8 @@ invtransfpca <- function(pca, importance) {
 #'     inteiros indicando as posicoes nas quais separar
 #' 
 #' @return objeto da classe \code{compactcen} contendo o dado em dimensao reduzida
+#' 
+#' @export
 
 acumulaena <- function(cenarios, quebras = 3L) {
 
