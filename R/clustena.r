@@ -10,4 +10,5 @@
 #' @docType package
 #' 
 #' @import data.table
+#' @import stats
 NULL
