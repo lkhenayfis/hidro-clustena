@@ -35,13 +35,6 @@ PCAena <- function(cenarios, vartot = .8) {
     new_compactcen(out, "PCAena", invtransfpca(pca, importance))
 }
 
-invtransfpca <- function(pca, importance) {
-    SIGMA <- pca$rotation[, seq(importance)]
-    SIGMA <- t(SIGMA)
-    out <- function(newdata) newdata %*% SIGMA
-    return(out)
-}
-
 #' Calcula ENA Acumulada
 #' 
 #' Reducao de dimensao por ENA acumulada, possivelmente em partes crescentes
@@ -73,6 +66,33 @@ acumulaena <- function(cenarios, quebras = 3L) {
 
     new_compactcen(out, "acumulaena", NULL)
 }
+
+# HELPERS ------------------------------------------------------------------------------------------
+
+#' Funcao Inversa Do PCA
+#' 
+#' Retorna uma funcao que recebe vetores no espaco reduzido e projeta de volta no espaco original
+#' 
+#' @param pca objeto da classe \code{prcomp}
+#' @param importance um inteiro indicando a ultima componente principal a manter
+#' 
+#' @return funcao que recebe um vetor no espaco reduzido e retorna projecao no espaco original
+
+invtransfpca <- function(pca, importance) {
+    SIGMA <- pca$rotation[, seq(importance)]
+    SIGMA <- t(SIGMA)
+    out <- function(newdata) newdata %*% SIGMA
+    return(out)
+}
+
+#' Soma Acumulada Por Degraus
+#' 
+#' Calcula a soma acumulada de um vetor em partes
+#' 
+#' @param x vetor do qual calcular soma
+#' @param qbr escalar ou vetor de inteiros indicando quantas partes ou onde separar as partes
+#' 
+#' @return vetor de ENA acumulada por partes
 
 stepcumsum <- function(x, qbr) {
     if(length(qbr) == 1) qbr <- floor(seq(1, length(x), length.out = qbr + 1)[-1])
