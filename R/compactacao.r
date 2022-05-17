@@ -17,6 +17,8 @@
 
 PCAena <- function(cenarios, vartot = .8) {
 
+    ind <- anoref <- bacia <- cenario <- NULL
+
     dat <- copy(cenarios$cenarios)
 
     pca <- dcast(dat, cenario ~ data, value.var = "ena")[, -1]
@@ -57,6 +59,8 @@ PCAena <- function(cenarios, vartot = .8) {
 #' @export
 
 acumulaena <- function(cenarios, quebras = 3L) {
+
+    ena <- NULL
 
     dat <- copy(cenarios$cenarios)
     dat[, ena := (ena - min(ena)) / diff(range(ena))]

@@ -16,7 +16,7 @@
 #' 
 #' @param compact data.table contendo a informacao de cenarios compactados. Ver Detalhes
 #' @param metodo string indicando o nome da funcao utilizada para compactacao
-#' @param infunc caso exista, funcao para transformar vetores no espaco reduzido de volta ao 
+#' @param invfunc caso exista, funcao para transformar vetores no espaco reduzido de volta ao 
 #'     original
 #' 
 #' @return Objeto da classe \code{compactcen}, uma lista de um emento chamado compact contendo o

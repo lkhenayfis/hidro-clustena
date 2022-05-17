@@ -15,6 +15,8 @@
 
 plot.cenariosena <- function(x, print = TRUE, ...) {
 
+    data <- ena <- cenario <- NULL
+
     nbacias <- length(attr(x, "bacias"))
     nanos   <- length(attr(x, "anos"))
     if(nbacias <= nanos) form <- anoref ~ bacia else form <- bacia ~ anoref

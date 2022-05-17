@@ -14,6 +14,8 @@
 \item{j}{escalar ou vetor de anos de referencia para extrair do dado}
 
 \item{k}{escalar ou vetor de datas para extrair do dado}
+
+\item{...}{nao possui uso -- existe apenas para consistencia com a generica}
 }
 \value{
 objecto \code{cenariosena} contendo apenas os valores especificados

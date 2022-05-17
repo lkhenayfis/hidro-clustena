@@ -35,6 +35,8 @@
 
 learqcenarios <- function(arq, pat_data = "%m/%Y") {
 
+    cenario <- data <- bacia <- anoref <- NULL
+
     temdia <- grepl("\\%d", pat_data)
     pat_data_2 <- ifelse(temdia, pat_data, paste0("%d__", pat_data))
 
@@ -76,12 +78,15 @@ new_cenariosena <- function(dat) {
 #' @param i escalar ou vetor de bacias para extrair do dado
 #' @param j escalar ou vetor de anos de referencia para extrair do dado
 #' @param k escalar ou vetor de datas para extrair do dado
+#' @param ... nao possui uso -- existe apenas para consistencia com a generica
 #' 
 #' @return objecto \code{cenariosena} contendo apenas os valores especificados
 #' 
 #' @export
 
 `[.cenariosena` <- function(x, i, j, k, ...) {
+
+    bacia <- anoref <- data <- NULL
 
     dat <- copy(x$cenarios)
 
@@ -119,7 +124,7 @@ rbind.cenariosena <- function(..., deparse.level = 1L) {
     } else if(nx == 2) {
         x1 <- x[[1]]$cenarios
         x2 <- x[[2]]$cenarios
- 
+
         new_cenariosena(rbind(x1, x2))
     } else if(nx > 2) {
         rbind(x[[1]], do.call(rbind, x[-1]))

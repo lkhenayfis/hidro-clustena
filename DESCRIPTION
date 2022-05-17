@@ -18,4 +18,5 @@ Depends:
     R (>= 4.0),
     utils (>= 4.0)
 Imports:
-    data.table (>= 1.10)
+    data.table (>= 1.10),
+    ggplot2 (>= 3.3)

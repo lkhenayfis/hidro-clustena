@@ -11,7 +11,7 @@ new_compactcen(compact, metodo, invfunc)
 
 \item{metodo}{string indicando o nome da funcao utilizada para compactacao}
 
-\item{infunc}{caso exista, funcao para transformar vetores no espaco reduzido de volta ao
+\item{invfunc}{caso exista, funcao para transformar vetores no espaco reduzido de volta ao
 original}
 }
 \value{
