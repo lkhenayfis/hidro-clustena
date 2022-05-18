@@ -4,15 +4,23 @@
 \alias{plot.cenariosena}
 \title{Visualizacao De \code{cenariosena}}
 \usage{
-\method{plot}{cenariosena}(x, print = TRUE, ...)
+\method{plot}{cenariosena}(x, y, ..., print = TRUE)
 }
 \arguments{
 \item{x}{objeto da classe \code{cenariosena}}
 
-\item{print}{booleano indicando se o plot deve ser exibido ou retornado invisivelmente}
+\item{y}{objeto da classe \code{cenariosena} a ser plotado por cima. Ver Detalhes}
 
 \item{...}{nao possui funcao -- existe apenas para consistencia com a generica}
+
+\item{print}{booleano indicando se o plot deve ser exibido ou retornado invisivelmente}
 }
 \description{
 Plot em grade de objetos \code{cenariosena}
+}
+\details{
+\code{y} permite que seja passado outro dado de cenarios que sera plotado por cima de \code{x}. O
+uso deste argumento e normalmente voltado ao highlight de cenarios selecionados e/ou extraidos do
+original, para fins de comparacao.
+Os cenarios em \code{y} serao coloridos de acordo com a ENA acumulada de cada um.
 }
