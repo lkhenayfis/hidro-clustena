@@ -4,7 +4,7 @@
 \alias{acumulaena}
 \title{Calcula ENA Acumulada}
 \usage{
-acumulaena(cenarios, quebras = 3L)
+acumulaena(cenarios, quebras = 1L)
 }
 \arguments{
 \item{cenarios}{objeto da classe \code{cenariosena} contendo apenas uma bacia e ano de referencia}

@@ -19,14 +19,20 @@ PCAena <- function(cenarios, vartot = .8) {
 
     ind <- anoref <- bacia <- cenario <- NULL
 
+    if(vartot > 1) vartot <- vartot / 100
+
     dat <- copy(cenarios$cenarios)
 
     pca <- dcast(dat, cenario ~ data, value.var = "ena")[, -1]
     pca <- prcomp(pca, scale = TRUE)
 
-    importance <- which(summary(pca)$importance[3, ] >= vartot)[1]
+    if(vartot < 0) {
+        importance <- 1
+    } else {
+        importance <- which(summary(pca)$importance[3, ] >= vartot)[1]
+    }
 
-    compdat <- pca$x[, seq(importance)]
+    compdat <- pca$x[, seq(importance), drop = FALSE]
     compdat <- cbind(cenario = seq(nrow(compdat)), as.data.table(compdat))
     compdat <- melt(compdat, id.vars = "cenario", variable.name = "ind", value.name = "ena")
     compdat[, ind := sub("[[:alpha:]]*", "", ind)]
@@ -58,9 +64,11 @@ PCAena <- function(cenarios, vartot = .8) {
 #' 
 #' @export
 
-acumulaena <- function(cenarios, quebras = 3L) {
+acumulaena <- function(cenarios, quebras = 1L) {
 
     ena <- NULL
+
+    if(quebras < 0) quebras <- length(attr(cenarios, "datas"))
 
     dat <- copy(cenarios$cenarios)
     dat[, ena := (ena - min(ena)) / diff(range(ena))]
