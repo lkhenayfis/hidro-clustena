@@ -4,16 +4,18 @@
 \alias{[.cenariosena}
 \title{Subset De \code{cenariosena}}
 \usage{
-\method{[}{cenariosena}(x, i, j, k, ...)
+\method{[}{cenariosena}(x, i, j, k, l, ...)
 }
 \arguments{
 \item{x}{objeto da classe \code{cenariosena}}
 
-\item{i}{escalar ou vetor de bacias para extrair do dado}
+\item{i}{escalar ou vetor de anos de referencia para extrair do dado}
 
-\item{j}{escalar ou vetor de anos de referencia para extrair do dado}
+\item{j}{escalar ou vetor de bacias para extrair do dado}
 
-\item{k}{escalar ou vetor de datas para extrair do dado}
+\item{k}{escalar ou vetor de indices de cenarios para extrair do dado}
+
+\item{l}{escalar ou vetor de datas para extrair do dado}
 
 \item{...}{nao possui uso -- existe apenas para consistencia com a generica}
 }

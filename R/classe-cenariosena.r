@@ -75,40 +75,44 @@ new_cenariosena <- function(dat) {
 #' Extrai subsets de objetos \code{cenariosena} e adequa os atributios
 #' 
 #' @param x objeto da classe \code{cenariosena}
-#' @param i escalar ou vetor de bacias para extrair do dado
-#' @param j escalar ou vetor de anos de referencia para extrair do dado
-#' @param k escalar ou vetor de datas para extrair do dado
+#' @param i escalar ou vetor de anos de referencia para extrair do dado
+#' @param j escalar ou vetor de bacias para extrair do dado
+#' @param k escalar ou vetor de indices de cenarios para extrair do dado
+#' @param l escalar ou vetor de datas para extrair do dado
 #' @param ... nao possui uso -- existe apenas para consistencia com a generica
 #' 
 #' @return objecto \code{cenariosena} contendo apenas os valores especificados
 #' 
 #' @export
 
-`[.cenariosena` <- function(x, i, j, k, ...) {
+`[.cenariosena` <- function(x, i, j, k, l, ...) {
 
-    bacia <- anoref <- data <- NULL
+    anoref <- bacia <- cenario <- data <- NULL
 
     dat <- copy(x$cenarios)
 
     if(missing(i)) {
-        i <- attr(x, "bacias")
+        i <- attr(x, "anos")
     } else if(is.numeric(i)) {
-        i <- attr(x, "bacias")[i]
+        i <- attr(x, "anos")[i]
     }
     if(missing(j)) {
-        j <- attr(x, "anos")
+        j <- attr(x, "bacias")
     } else if(is.numeric(j)) {
-        j <- attr(x, "anos")[j]
+        j <- attr(x, "bacias")[j]
     }
     if(missing(k)) {
-        k <- attr(x, "datas")
-    } else if(is.numeric(k)) {
-        k <- attr(x, "datas")[k]
+        k <- seq(attr(x, "ncen"))
+    }
+    if(missing(l)) {
+        l <- attr(x, "datas")
+    } else if(is.numeric(l)) {
+        l <- attr(x, "datas")[l]
     } else {
-        k <- as.Date(k)
+        l <- as.Date(l)
     }
 
-    dat <- dat[(bacia %in% i) & (anoref %in% j) & (data %in% k)]
+    dat <- dat[(anoref %in% i) & (bacia %in% j) & (cenario %in% k) & (data %in% l)]
 
     new_cenariosena(dat)
 }
