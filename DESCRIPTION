@@ -20,3 +20,5 @@ Depends:
 Imports:
     data.table (>= 1.10),
     ggplot2 (>= 3.3)
+Suggests:
+    mclust (>= 5.0)
