@@ -37,5 +37,5 @@ As paginas de help de cada uma das funcoes contem detalhes a respeito dos argume
 (que podem ser passados as funcoes de selecao atraves de \code{...} naquelas chamadas).
 }
 \seealso{
-clustkmeans clustEM
+Funcoes \code{\link{clustkmeans}} e \code{\link{clustem}} para clusterizacao
 }

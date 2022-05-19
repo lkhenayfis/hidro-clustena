@@ -20,6 +20,8 @@
 #' \code{data} que muda para \code{ind}, indicando o indice da variavel compactada para cada 
 #' cenario. Consulte a pagina de ajuda do construtor para mais detalhes.
 #' 
+#' @seealso Funcoes \code{\link{PCAena}} e \code{\link{acumulaena}} para compactacao de dados
+#' 
 #' @name compact_funs
 NULL
 

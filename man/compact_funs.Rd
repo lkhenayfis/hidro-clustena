@@ -23,3 +23,6 @@ receber um datatable com estrutura igual a de objetos \code{cenariosena}, exceto
 \code{data} que muda para \code{ind}, indicando o indice da variavel compactada para cada
 cenario. Consulte a pagina de ajuda do construtor para mais detalhes.
 }
+\seealso{
+Funcoes \code{\link{PCAena}} e \code{\link{acumulaena}} para compactacao de dados
+}
