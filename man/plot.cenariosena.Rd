@@ -4,14 +4,12 @@
 \alias{plot.cenariosena}
 \title{Visualizacao De \code{cenariosena}}
 \usage{
-\method{plot}{cenariosena}(x, y, ..., print = TRUE)
+\method{plot}{cenariosena}(x, ..., print = TRUE)
 }
 \arguments{
 \item{x}{objeto da classe \code{cenariosena}}
 
-\item{y}{objeto da classe \code{cenariosena} a ser plotado por cima. Ver Detalhes}
-
-\item{...}{nao possui funcao -- existe apenas para consistencia com a generica}
+\item{...}{objetos \code{cenariosena} opcionais com cenarios a serem plotados por cima}
 
 \item{print}{booleano indicando se o plot deve ser exibido ou retornado invisivelmente}
 }
@@ -19,8 +17,10 @@
 Plot em grade de objetos \code{cenariosena}
 }
 \details{
-\code{y} permite que seja passado outro dado de cenarios que sera plotado por cima de \code{x}. O
-uso deste argumento e normalmente voltado ao highlight de cenarios selecionados e/ou extraidos do
-original, para fins de comparacao.
-Os cenarios em \code{y} serao coloridos de acordo com a ENA acumulada de cada um.
+O argumento \code{...} permite que sejam passados mais outros objetos \code{cenariosena} contendo
+um numero menor de cenarios selecionados para plot por cima do completo. A intencao de uso deste
+argumento e passar \code{cenariosena} para cada ano dos quais se tiram cenarios, fazendo a
+selecao do mesmo numero de cenarios a cada ano de referencia. Assim, se existem tres anos de
+referencia, \code{...} corresponde a tres objetos \code{cenariosena} contendo cada um um unico
+ano de referencia e o mesmo numero N de cenarios selecionados.
 }
