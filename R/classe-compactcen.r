@@ -4,7 +4,7 @@
 #' 
 #' Construtor interno de objetos com cenarios compactados
 #' 
-#' O argumento \code{compact} deve seguir um padrao de formato:
+#' O argumento \code{compact} deve ser um data.table seguindo um padrao de formato:
 #' 
 #' \describe{
 #' \item{\code{anoref}}{ano de referencia para geracao do cenario}
@@ -13,6 +13,21 @@
 #' \item{\code{ind}}{indice do elemento no vetor de dimensao reduzida}
 #' \item{\code{ena}}{valor de energia afluente}
 #' }
+#' 
+#' Por exemplo, para compactacao dos cenarios em tres dimensoes:
+#' 
+#' | anoref | bacia | cenario | ind | ena |
+#' | :----: | :---: | :-----: | :-: | :-: |
+#' | 2000   | SIN   | 1       | 1   | XXX |
+#' | 2000   | SIN   | 1       | 2   | XXX |
+#' | 2000   | SIN   | 1       | 3   | XXX |
+#' | 2000   | SIN   | 2       | 1   | XXX |
+#' | ...    | ...   | ...     | ... | ... |
+#' 
+#' \code{invfunc} deve ser uma funcao que recebe apenas um vetor numerico indicando coordenadas no
+#' espaco compactado e retorna um vetor numerico indicando o cenario completo correspondente aquela
+#' compactacao. Para PCA, por exemplo, isso pode ser feito multiplicando o vetor de variaveis 
+#' compactadas pela matriz de carregamentos estimada.
 #' 
 #' @param compact data.table contendo a informacao de cenarios compactados. Ver Detalhes
 #' @param metodo string indicando o nome da funcao utilizada para compactacao
