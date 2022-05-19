@@ -93,8 +93,6 @@ new_cenariosena <- function(dat) {
 
     if(missing(i)) {
         i <- attr(x, "anos")
-    } else if(is.numeric(i)) {
-        i <- attr(x, "anos")[i]
     }
     if(missing(j)) {
         j <- attr(x, "bacias")
