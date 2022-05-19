@@ -88,6 +88,10 @@ getclustclass.default <- function(clust) {
 #' 
 #' @return objeto da classe \code{clustenakmeans}: uma lista de um elemento contendo a saida da
 #'     clusterizacao
+#' 
+#' @importFrom stats kmeans
+#' 
+#' @export
 
 clustkmeans <- function(mat, nc, nstart = 30, ...) {
     clusters <- kmeans(mat, nc, nstart = nstart, ...)
@@ -121,6 +125,8 @@ getclustmeans.clustenakmeans <- function(clust) clust[[1]]$centers
 #' 
 #' @return objeto da classe \code{clustenaem}: uma lista de um elemento contendo a saida da
 #'     clusterizacao
+#' 
+#' @export
 
 clustEM <- function(mat, nc, ...) {
     if(!requireNamespace("mclust", quietly = TRUE)) {
