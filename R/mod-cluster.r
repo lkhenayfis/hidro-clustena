@@ -1,5 +1,43 @@
 ############################### WRAPPERS DE FUNCOES DE CLUSTERIZACAO ###############################
 
+#' Funcoes De Clusterizacao
+#' 
+#' Wrappers de metodos de clusterizacao para uso nos processos do pacote
+#' 
+#' Durante a execucao das funcoes de selecao e/ou extracao de cenarios, o objeto \code{cenariosena}
+#' passa por uma reducao de dimensionalidade e posterior clusterizacao. As funcoes para clusterizar
+#' o dado podem implementar qualquer metodo, mas devem respeitar alguns padroes de argumentos de 
+#' entrada e caracteristicas na saida.
+#' 
+#' Quanto as entradas, todas as funcoes de clusterizacao precisam receber o primeiro argumento 
+#' chamado \code{mat}, correspondente a uma matrix ou data.frame-like contendo observacoes a serem
+#' clusterizadas nas linhas e variaveis nas colunas (formato padrao). Alem de \code{mat}, o segundo
+#' argumento deve ser \code{nc}, recebendo um inteiro indicando o numero de clustes desejados. Os 
+#' demais argumentos sao livres, porem independentemente deles deve existir \code{...} para 
+#' consistencia com as demais funcoes.
+#' 
+#' Em seguida, as caracteristicas de saida. Todas as funcoes utilizadas para clusterizacao devem
+#' retornar um objeto com classe \code{"clustena"} e uma subclasse especifica do metodo. Por exemplo
+#' a funcao \code{\link{clustkmeans}} retorna resultado com classe 
+#' \code{c("clustenakmeans", "clustena")}. Alem disso, devem ser definidos metodos das genericas
+#' \code{getclustclass} e \code{getclustmeans}, que extraem do objeto de saida as classificacoes de
+#' cada obsevacao e centroides dos clusters, respectivamente.
+#' 
+#' Atualmente o pacote fornece duas opcoes:
+#' 
+#' \itemize{
+#' \item{\code{clustkmeans}}
+#' \item{\code{clustEM}}
+#' }
+#' 
+#' As paginas de help de cada uma das funcoes contem detalhes a respeito dos argumentos de cada uma
+#' (que podem ser passados as funcoes de selecao atraves de \code{...} naquelas chamadas).
+#' 
+#' @seealso clustkmeans clustEM
+#' 
+#' @name clust_funs
+NULL
+
 # GENERICAS ----------------------------------------------------------------------------------------
 
 #' Genericas Para Classes Cluster
@@ -46,7 +84,7 @@ getclustclass.default <- function(clust) {
 #' @param mat matriz de dados para clusterizacao
 #' @param nc numero de clusters
 #' @param nstart numero de sementes para testar o kmeans
-#' @param ... demais parametros passados a funcao \code{\link[stats]{kmeans}}
+#' @param ... demais parametros passados a funcao \code{\link[stats]{kmeans}} exceto \code{nstart}
 #' 
 #' @return objeto da classe \code{clustenakmeans}: uma lista de um elemento contendo a saida da
 #'     clusterizacao

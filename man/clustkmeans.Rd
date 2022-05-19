@@ -19,7 +19,7 @@ clustkmeans(mat, nc, nstart = 30, ...)
 
 \item{nstart}{numero de sementes para testar o kmeans}
 
-\item{...}{demais parametros passados a funcao \code{\link[stats]{kmeans}}}
+\item{...}{demais parametros passados a funcao \code{\link[stats]{kmeans}} exceto \code{nstart}}
 
 \item{clust}{objeto da classe \code{clustenakmeans}}
 }
