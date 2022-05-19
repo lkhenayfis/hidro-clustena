@@ -13,6 +13,8 @@
 #' @name getclust
 NULL
 
+#' @export 
+#' 
 #' @rdname getclust
 
 getclustmeans <- function(clust) UseMethod("getclustmeans")
@@ -23,6 +25,8 @@ getclustmeans.default <- function(clust) {
     stop(paste0("Metodo 'getclustmeans' nao implementado para a classe ", class(clust)))
 }
 
+#' @export 
+#' 
 #' @rdname getclust
 
 getclustclass <- function(clust) UseMethod("getclustclass")
