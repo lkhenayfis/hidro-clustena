@@ -84,7 +84,7 @@ plot.cenariosena <- function(x, ..., print = TRUE) {
 
 plot.compactcen <- function(x, clusters, print = TRUE, ...) {
 
-    clust <- Dim1 <- Dim2 <- NULL
+    Cluster <- Dim1 <- Dim2 <- NULL
 
     dat <- copy(x$compact)
     dat <- dcast(dat, cenario ~ ind, value.var = "ena")[, -1]
