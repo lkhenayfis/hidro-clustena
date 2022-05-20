@@ -7,6 +7,7 @@
 
 [![R-CMD-check](https://github.com/lkhenayfis/hidro-clustena/workflows/R-CMD-check/badge.svg)](https://github.com/lkhenayfis/hidro-clustena/actions)
 [![test-coverage](https://github.com/lkhenayfis/hidro-clustena/workflows/test-coverage/badge.svg)](https://github.com/lkhenayfis/hidro-clustena/actions)
+[![codecov](https://codecov.io/gh/lkhenayfis/hidro-clustena/branch/master/graph/badge.svg?token=S6ABRH82G0)](https://codecov.io/gh/lkhenayfis/hidro-clustena)
 <!-- badges: end -->
 
 Este pacote prove funcoes para selecao de cenarios de Energia Natural
