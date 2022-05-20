@@ -3,7 +3,6 @@
 S3method("[",cenariosena)
 S3method(plot,cenariosena)
 S3method(plot,compactcen)
-S3method(rbind,cenariosena)
 export(PCAena)
 export(acumulaena)
 export(clustEM)

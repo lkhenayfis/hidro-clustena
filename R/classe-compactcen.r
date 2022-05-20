@@ -59,21 +59,3 @@ new_compactcen <- function(compact, metodo, invfunc) {
 
     return(out)
 }
-
-# METODOS ------------------------------------------------------------------------------------------
-
-rbind.compactcen <- function(..., deparse.level = 1L) {
-    x <- list(...)
-    nx <- length(x)
-
-    if(nx == 1) {
-        return(x[[1]])
-    } else if(nx == 2) {
-        x1 <- x[[1]]$compact
-        x2 <- x[[2]]$compact
-
-        new_compactcen(rbind(x1, x2), attr(x[[1]], "metodo"), attr(x[[1]], "invfunc"))
-    } else if(nx > 2) {
-        rbind(x[[1]], do.call(rbind, x[-1]))
-    }
-}
