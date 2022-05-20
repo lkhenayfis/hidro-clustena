@@ -22,6 +22,16 @@ geracao destes objetos e feita pela funcao \code{\link{new_compactcen}}. Essenci
 receber um datatable com estrutura igual a de objetos \code{cenariosena}, exceto pela coluna
 \code{data} que muda para \code{ind}, indicando o indice da variavel compactada para cada
 cenario. Consulte a pagina de ajuda do construtor para mais detalhes.
+
+Atualmente o pacote fornece duas opcoes:
+
+\itemize{
+\item{\code{\link{PCAena}}}
+\item{\code{\link{acumulaena}}}
+}
+
+As paginas de help de cada uma das funcoes contem detalhes a respeito dos argumentos de cada uma
+(que podem ser passados as funcoes de selecao atraves de \code{compact_args} naquelas chamadas).
 }
 \seealso{
 Funcoes \code{\link{PCAena}} e \code{\link{acumulaena}} para compactacao de dados

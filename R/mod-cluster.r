@@ -25,8 +25,8 @@
 #' Atualmente o pacote fornece duas opcoes:
 #' 
 #' \itemize{
-#' \item{\code{clustkmeans}}
-#' \item{\code{clustEM}}
+#' \item{\code{\link{clustkmeans}}}
+#' \item{\code{\link{clustEM}}}
 #' }
 #' 
 #' As paginas de help de cada uma das funcoes contem detalhes a respeito dos argumentos de cada uma
