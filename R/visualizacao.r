@@ -61,3 +61,66 @@ plot.cenariosena <- function(x, ..., print = TRUE) {
 
     invisible(g)
 }
+
+#' Visualizacao De \code{compactcen}
+#' 
+#' Plot do dado compactado em ate tres dimensoes, possivelmente colorido por clusters estimados
+#' 
+#' Esta funcao permite a visualizacao da compactacao de cenarios e resultado da clusterizacao. Deve
+#' ser notado que sua funcionalidade esta prevista apenas para compactacoes em ate tres dimensoes e
+#' retornara um erro caso seja passado \code{x} com quatro ou mais.
+#' 
+#' @param x objeto da classe \code{compactcen} gerado por uma das funcoes de compactacao
+#' @param clusters argumento opcional, objeto retornado por uma das funcoes de clusterizacao
+#' @param print booleano indicando se o plot deve ser exibido ou retornado invisivelmente
+#' @param ... nao possui utilidade, existe apenas para consistencia com a generica
+#' 
+#' @return O plot das variaveis compactadas. Isto sera um objeto \code{ggplot} caso a compactacao 
+#'     tenha sido feita em uma ou duas dimensoes ou um objeto \code{plot_ly} caso em tres.
+#' 
+#' @importFrom ggplot2 ggplot aes geom_point scale_color_discrete theme_bw
+#' 
+#' @export
+
+plot.compactcen <- function(x, clusters, print = TRUE, ...) {
+
+    clust <- Dim1 <- Dim2 <- NULL
+
+    dat <- copy(x$compact)
+    dat <- dcast(dat, cenario ~ ind, value.var = "ena")[, -1]
+    colnames(dat) <- paste0("Dim", seq(ncol(dat)))
+    dim <- ncol(dat)
+
+    if(dim == 3 & !requireNamespace("plotly", quiet = TRUE)) {
+        stop("Visualizacao de compactacoes em tres dimensoes requer o pacote 'plotly'")
+    }
+
+    if(!missing("clusters")) {
+        dat[, Cluster := getclustclass(clusters)]
+        gp <- geom_point(aes(color = Cluster))
+        lycol <- list(color = ~Cluster)
+    } else {
+        gp <- geom_point()
+        lycol <- list()
+    }
+
+    dat[, Cluster := factor(Cluster, labels = paste0("Clust.", unique(Cluster)), ordered = TRUE)]
+
+    if(dim == 1) {
+        dat[, Dim2 := rep(0, .N)]
+        pp <- ggplot(dat, aes(Dim1, Dim2)) + gp + theme_bw()
+    } else if(dim == 2) {
+        pp <- ggplot(dat, aes(Dim1, Dim2)) + gp + theme_bw()
+    } else if(dim == 3) {
+        call <- c(list(quote(plotly::plot_ly), quote(dat), x = ~Dim1, y = ~Dim2, z = ~Dim3,
+            type = "scatter3d", mode = "markers"), lycol)
+        call <- as.call(call)
+        pp <- eval(call)
+    } else {
+        stop("Visualizacao de 'compactcen' so funciona com ate tres dimensoes")
+    }
+
+    if(print) print(pp)
+
+    invisible(pp)
+}
