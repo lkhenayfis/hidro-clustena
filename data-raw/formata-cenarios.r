@@ -1,3 +1,4 @@
 devtools::load_all()
-cenariosdummy <- learqcenarios("data-raw/cenarios.csv")
+arq <- system.file("extdata/cenarios.csv", package = "clustena")
+cenariosdummy <- learqcenarios(arq)
 usethis::use_data(cenariosdummy, overwrite = TRUE)
