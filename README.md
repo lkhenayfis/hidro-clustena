@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/lkhenayfis/hidro-clustena/workflows/R-CMD-check/badge.svg)](https://github.com/lkhenayfis/hidro-clustena/actions)
+[![test-coverage](https://github.com/lkhenayfis/hidro-clustena/workflows/test-coverage/badge.svg)](https://github.com/lkhenayfis/hidro-clustena/actions)
 <!-- badges: end -->
 
 Este pacote prove funcoes para selecao de cenarios de Energia Natural
@@ -34,7 +36,7 @@ library(clustena)
 # selecao de cenarios por PCA + Kmeans (com dado exemplo do pacote)
 cenarios <- cenariosdummy["A1", "SIN", , -c(1:5)]
 selected <- selecporcluster(cenarios, 3)
-plot(cenarios, cenarios[, , selected])
+plot(cenarios, cenarios[, , selected[[1]]])
 ```
 
 <img src="man/figures/README-leitura-1.png" width="100%" />
