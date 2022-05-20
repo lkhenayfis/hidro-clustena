@@ -103,6 +103,8 @@ selecporcluster <- function(cenarios, nc, clust_fun = clustkmeans, ..., transfor
 
         # calcula elementos mais proximos de cada centroide
 
+        dat <- extracdims(compact)
+
         novaordem <- split(seq(nrow(dat)), getclustclass(cluster))
 
         dat_clust <- split(dat, getclustclass(cluster))
