@@ -18,7 +18,7 @@ test_that("Testes de clusterizacao", {
 
     # EM
 
-    clust <- clustEM(compac, 5)
+    clust <- clustEM(compac, 5, verbose = FALSE)
 
     expect_equal(class(clust), "Mclust")
     expect_snapshot_value(getclustclass(clust), style = "deparse")

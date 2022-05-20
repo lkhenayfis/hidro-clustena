@@ -15,7 +15,7 @@ test_that("Testes de selecao de cenarios", {
     expect_equal(class(sel[[3]]), "kmeans")
 
     sel <- selecporcluster(cens, 5, compact_fun = acumulaena, compact_args = list(quebras = 3),
-        clust_fun = clustEM)
+        clust_fun = clustEM, verbose = FALSE)
 
     expect_equal(length(sel), 3)
 
