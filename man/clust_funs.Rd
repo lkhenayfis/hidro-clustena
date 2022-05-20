@@ -18,12 +18,12 @@ clusterizadas. Alem dele, o segundo argumento deve ser \code{nc}, recebendo um i
 o numero de clustes desejados. Os demais argumentos sao livres, porem independentemente deles
 deve existir \code{...} para consistencia com as demais funcoes.
 
-Em seguida, as caracteristicas de saida. Todas as funcoes utilizadas para clusterizacao devem
-retornar um objeto com classe \code{"clustena"} e uma subclasse especifica do metodo. Por exemplo
-a funcao \code{\link{clustkmeans}} retorna resultado com classe
-\code{c("clustenakmeans", "clustena")}. Alem disso, devem ser definidos metodos das genericas
-\code{getclustclass} e \code{getclustmeans}, que extraem do objeto de saida as classificacoes de
-cada obsevacao e centroides dos clusters, respectivamente.
+Nao ha restricoes ou especificacoes para o objeto de saida, porem devem ser definidos metodos das
+genericas \code{getclustclass} e \code{getclustmeans}, que extraem do objeto de saida as
+classificacoes de cada obsevacao e centroides dos clusters respectivamente, para a classe dos
+objetos retornados. Por exemplo, \code{clustkmeans} retorna um objeto com classe \code{kmeans},
+de modo que ha implementadas no pacote \code{getclustmeans.kmeans} e \code{getclustclass.kmeans},
+que recebem objetos dessa classe e extraem centroides e classficacoes respectivamente.
 
 Atualmente o pacote fornece duas opcoes:
 

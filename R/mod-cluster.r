@@ -15,12 +15,12 @@
 #' o numero de clustes desejados. Os demais argumentos sao livres, porem independentemente deles
 #' deve existir \code{...} para consistencia com as demais funcoes.
 #' 
-#' Em seguida, as caracteristicas de saida. Todas as funcoes utilizadas para clusterizacao devem
-#' retornar um objeto com classe \code{"clustena"} e uma subclasse especifica do metodo. Por exemplo
-#' a funcao \code{\link{clustkmeans}} retorna resultado com classe 
-#' \code{c("clustenakmeans", "clustena")}. Alem disso, devem ser definidos metodos das genericas
-#' \code{getclustclass} e \code{getclustmeans}, que extraem do objeto de saida as classificacoes de
-#' cada obsevacao e centroides dos clusters, respectivamente.
+#' Nao ha restricoes ou especificacoes para o objeto de saida, porem devem ser definidos metodos das 
+#' genericas \code{getclustclass} e \code{getclustmeans}, que extraem do objeto de saida as 
+#' classificacoes de cada obsevacao e centroides dos clusters respectivamente, para a classe dos 
+#' objetos retornados. Por exemplo, \code{clustkmeans} retorna um objeto com classe \code{kmeans},
+#' de modo que ha implementadas no pacote \code{getclustmeans.kmeans} e \code{getclustclass.kmeans},
+#' que recebem objetos dessa classe e extraem centroides e classficacoes respectivamente.
 #' 
 #' Atualmente o pacote fornece duas opcoes:
 #' 
@@ -85,8 +85,7 @@ getclustclass.default <- function(clust) {
 #' @param nstart numero de sementes para testar o kmeans
 #' @param ... demais parametros passados a funcao \code{\link[stats]{kmeans}} exceto \code{nstart}
 #' 
-#' @return objeto da classe \code{clustenakmeans}: uma lista de um elemento contendo a saida da
-#'     clusterizacao
+#' @return objeto \code{kmeans} -- Veja \code{\link[stats]{kmeans}} para mais detalhes
 #' 
 #' @importFrom stats kmeans
 #' 
@@ -96,9 +95,6 @@ clustkmeans <- function(compact, nc, nstart = 30, ...) {
 
     mat <- extracdims(compact)
     clusters <- kmeans(mat, nc, nstart = nstart, ...)
-    clusters <- list(clusters = clusters)
-    class(clusters) <- c("clustenakmeans", "clustena")
-
     return(clusters)
 }
 
@@ -106,13 +102,13 @@ clustkmeans <- function(compact, nc, nstart = 30, ...) {
 #' 
 #' @rdname clustkmeans
 
-getclustclass.clustenakmeans <- function(clust) clust[[1]]$cluster
+getclustclass.kmeans <- function(clust) clust$cluster
 
 #' @param clust objeto da classe \code{clustenakmeans}
 #' 
 #' @rdname clustkmeans
 
-getclustmeans.clustenakmeans <- function(clust) clust[[1]]$centers
+getclustmeans.kmeans <- function(clust) clust$centers
 
 # EM MIXTURE GUASS ---------------------------------------------------------------------------------
 
@@ -124,8 +120,7 @@ getclustmeans.clustenakmeans <- function(clust) clust[[1]]$centers
 #' @param nc numero de clusters
 #' @param ... demais parametros passados a funcao \code{\link[mclust]{Mclust}}
 #' 
-#' @return objeto da classe \code{clustenaem}: uma lista de um elemento contendo a saida da
-#'     clusterizacao
+#' @return objeto \code{Mclust} -- Veja \code{\link[mclust]{Mclust}} para mais detalhes
 #' 
 #' @export
 
@@ -145,9 +140,6 @@ clustEM <- function(compact, nc, ...) {
     mclustBIC <- mclust::mclustBIC
 
     clusters <- mclust::Mclust(mat, G = nc, ...)
-    clusters <- list(clusters = clusters)
-    class(clusters) <- c("clustenaem", "clustena")
-
     return(clusters)
 }
 
@@ -155,13 +147,13 @@ clustEM <- function(compact, nc, ...) {
 #' 
 #' @rdname clustEM
 
-getclustclass.clustenaem <- function(clust) clust[[1]]$classification
+getclustclass.Mclust <- function(clust) clust$classification
 
 #' @param clust objeto da classe \code{clustenaem}
 #' 
 #' @rdname clustEM
 
-getclustmeans.clustenaem <- function(clust) t(clust[[1]]$parameters$mean)
+getclustmeans.Mclust <- function(clust) t(clust$parameters$mean)
 
 # HELPERS ------------------------------------------------------------------------------------------
 

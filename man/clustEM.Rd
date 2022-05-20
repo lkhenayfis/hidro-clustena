@@ -2,15 +2,15 @@
 % Please edit documentation in R/mod-cluster.r
 \name{clustEM}
 \alias{clustEM}
-\alias{getclustclass.clustenaem}
-\alias{getclustmeans.clustenaem}
+\alias{getclustclass.Mclust}
+\alias{getclustmeans.Mclust}
 \title{Clusteriza Dado Por Mistura Gaussiana}
 \usage{
 clustEM(compact, nc, ...)
 
-\method{getclustclass}{clustenaem}(clust)
+\method{getclustclass}{Mclust}(clust)
 
-\method{getclustmeans}{clustenaem}(clust)
+\method{getclustmeans}{Mclust}(clust)
 }
 \arguments{
 \item{compact}{objeto \code{compactcen} contendo cenarios compactados para clusterizar}
@@ -22,8 +22,7 @@ clustEM(compact, nc, ...)
 \item{clust}{objeto da classe \code{clustenaem}}
 }
 \value{
-objeto da classe \code{clustenaem}: uma lista de um elemento contendo a saida da
-clusterizacao
+objeto \code{Mclust} -- Veja \code{\link[mclust]{Mclust}} para mais detalhes
 }
 \description{
 Wrapper da funcao \code{\link[mclust]{Mclust}} para uso neste pacote

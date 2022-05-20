@@ -2,15 +2,15 @@
 % Please edit documentation in R/mod-cluster.r
 \name{clustkmeans}
 \alias{clustkmeans}
-\alias{getclustclass.clustenakmeans}
-\alias{getclustmeans.clustenakmeans}
+\alias{getclustclass.kmeans}
+\alias{getclustmeans.kmeans}
 \title{Clusteriza Dado Por Kmeans}
 \usage{
 clustkmeans(compact, nc, nstart = 30, ...)
 
-\method{getclustclass}{clustenakmeans}(clust)
+\method{getclustclass}{kmeans}(clust)
 
-\method{getclustmeans}{clustenakmeans}(clust)
+\method{getclustmeans}{kmeans}(clust)
 }
 \arguments{
 \item{compact}{objeto \code{compactcen} contendo cenarios compactados para clusterizar}
@@ -24,8 +24,7 @@ clustkmeans(compact, nc, nstart = 30, ...)
 \item{clust}{objeto da classe \code{clustenakmeans}}
 }
 \value{
-objeto da classe \code{clustenakmeans}: uma lista de um elemento contendo a saida da
-clusterizacao
+objeto \code{kmeans} -- Veja \code{\link[stats]{kmeans}} para mais detalhes
 }
 \description{
 Wrapper da funcao \code{\link[stats]{kmeans}} para uso neste pacote
