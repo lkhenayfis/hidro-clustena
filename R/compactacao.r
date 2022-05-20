@@ -70,7 +70,7 @@ PCAena <- function(cenarios, vartot = .8) {
     compdat <- pca$x[, seq(importance), drop = FALSE]
     compdat <- cbind(cenario = seq(nrow(compdat)), as.data.table(compdat))
     compdat <- melt(compdat, id.vars = "cenario", variable.name = "ind", value.name = "ena")
-    compdat[, ind := sub("[[:alpha:]]*", "", ind)]
+    compdat[, ind := as.numeric(sub("[[:alpha:]]*", "", ind))]
 
     out <- cbind(anoref = dat$anoref[1], bacia = dat$bacia[1], compdat)
     setorder(out, anoref, bacia, cenario, ind)
