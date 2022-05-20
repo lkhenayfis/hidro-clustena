@@ -15,7 +15,8 @@ selecporcluster(
 )
 }
 \arguments{
-\item{cenarios}{objeto da classe \code{cenariosena} do qual selecionar cenarios representativos}
+\item{cenarios}{objeto da classe \code{cenariosena} do qual selecionar cenarios representativos
+contendo apenas uma bacia e ano de referencia}
 
 \item{nc}{numero de clusters}
 
@@ -32,7 +33,8 @@ para a escala original (\code{TRUE}). Ver Detalhes}
 \item{compact_args}{lista nomeada informando argumentos (alem do primeiro) a \code{compact_fun}}
 }
 \value{
-vetor de inteiros indicando indices dos cenarios selecionados
+lista contendo vetor de inteiros indicando indices dos cenarios selecionados, resultado
+da compactacao e resultado da clusterizacao
 }
 \description{
 Seleciona ou extrai cenarios baseado nos centroides da clusterizacao de cenarios

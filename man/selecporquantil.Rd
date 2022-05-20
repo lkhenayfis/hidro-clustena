@@ -12,7 +12,8 @@ selecporquantil(
 )
 }
 \arguments{
-\item{cenarios}{objeto da classe \code{cenariosena} do qual selecionar cenarios representativos}
+\item{cenarios}{objeto da classe \code{cenariosena} do qual selecionar cenarios representativos
+contendo apenas uma bacia e ano de referencia}
 
 \item{quantis}{vetor de quantis para selecionar}
 
@@ -21,7 +22,8 @@ selecporquantil(
 \item{compact_args}{lista nomeada informando argumentos (alem do primeiro) a \code{compact_fun}}
 }
 \value{
-vetor de inteiros indicando indices dos cenarios selecionados
+lista contendo vetor de inteiros indicando indices dos cenarios selecionados e resultado
+da compactacao
 }
 \description{
 Seleciona cenarios representativos buscando aqueles mais proximos de quantis especificados

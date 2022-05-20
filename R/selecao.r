@@ -17,11 +17,13 @@
 #' retornados os indices dos cenarios associados aos quantis mais proximos. 
 #' 
 #' @param cenarios objeto da classe \code{cenariosena} do qual selecionar cenarios representativos
+#'     contendo apenas uma bacia e ano de referencia
 #' @param quantis vetor de quantis para selecionar
 #' @param compact_fun funcao para compactacao dos cenarios. Ver \code{\link{compact_funs}}
 #' @param compact_args lista nomeada informando argumentos (alem do primeiro) a \code{compact_fun}
 #' 
-#' @return vetor de inteiros indicando indices dos cenarios selecionados
+#' @return lista contendo vetor de inteiros indicando indices dos cenarios selecionados e resultado 
+#'     da compactacao
 #' 
 #' @export
 
@@ -39,7 +41,9 @@ selecporquantil <- function(cenarios, quantis = c(.25, .5, .75), compact_fun = a
     dat_quant <- quantile(dat[[1]], quantis)
     maisprox  <- unname(sapply(dat_quant, function(dq) which.min((dat[[1]] - dq)^2)))
 
-    return(maisprox)
+    out <- list(maisprox, compact)
+
+    return(out)
 }
 
 #' Selecao Ou Extracao De Cenarios Por Clusterizacao
@@ -69,6 +73,7 @@ selecporquantil <- function(cenarios, quantis = c(.25, .5, .75), compact_fun = a
 #' transformacao que nao permite retornar para a escala original. Outras como PCA e autoencoder sim.
 #' 
 #' @param cenarios objeto da classe \code{cenariosena} do qual selecionar cenarios representativos
+#'     contendo apenas uma bacia e ano de referencia
 #' @param nc numero de clusters
 #' @param clust_fun funcao para clusterizacao. Veja \code{\link{clust_funs}} para mais detalhes
 #' @param ... demais parametros passados a \code{clust_fun}
@@ -78,7 +83,8 @@ selecporquantil <- function(cenarios, quantis = c(.25, .5, .75), compact_fun = a
 #' @param compact_fun funcao para compactacao dos cenarios. Ver \code{\link{compact_funs}}
 #' @param compact_args lista nomeada informando argumentos (alem do primeiro) a \code{compact_fun}
 #' 
-#' @return vetor de inteiros indicando indices dos cenarios selecionados
+#' @return lista contendo vetor de inteiros indicando indices dos cenarios selecionados, resultado 
+#'     da compactacao e resultado da clusterizacao
 #' 
 #' @export
 
@@ -108,6 +114,8 @@ selecporcluster <- function(cenarios, nc, clust_fun = clustkmeans, ..., transfor
         maisprox <- lapply(maisprox, which.min)
         maisprox <- mapply(novaordem, maisprox, FUN = function(v, i) v[i])
 
-        return(maisprox)
+        out <- list(maisprox, compact, cluster)
+
+        return(out)
     }
 }
