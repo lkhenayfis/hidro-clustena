@@ -91,20 +91,19 @@ plot.compactcen <- function(x, clusters, print = TRUE, ...) {
     colnames(dat) <- paste0("Dim", seq(ncol(dat)))
     dim <- ncol(dat)
 
-    if(dim == 3 & !requireNamespace("plotly", quiet = TRUE)) {
+    if(dim == 3 & !requireNamespace("plotly", quietly = TRUE)) {
         stop("Visualizacao de compactacoes em tres dimensoes requer o pacote 'plotly'")
     }
 
     if(!missing("clusters")) {
         dat[, Cluster := getclustclass(clusters)]
+        dat[, Cluster := factor(Cluster, labels = paste0("Clust.", unique(Cluster)), ordered = TRUE)]
         gp <- geom_point(aes(color = Cluster))
         lycol <- list(color = ~Cluster)
     } else {
         gp <- geom_point()
         lycol <- list()
     }
-
-    dat[, Cluster := factor(Cluster, labels = paste0("Clust.", unique(Cluster)), ordered = TRUE)]
 
     if(dim == 1) {
         dat[, Dim2 := rep(0, .N)]
