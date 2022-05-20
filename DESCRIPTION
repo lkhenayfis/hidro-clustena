@@ -21,5 +21,7 @@ Imports:
     data.table (>= 1.10),
     ggplot2 (>= 3.3)
 Suggests:
+    testthat (>= 3.0.0),
     mclust (>= 5.0),
     plotly (>= 4.0)
+Config/testthat/edition: 3
