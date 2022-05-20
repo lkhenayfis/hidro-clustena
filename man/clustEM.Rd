@@ -6,14 +6,14 @@
 \alias{getclustmeans.clustenaem}
 \title{Clusteriza Dado Por Mistura Gaussiana}
 \usage{
-clustEM(mat, nc, ...)
+clustEM(compact, nc, ...)
 
 \method{getclustclass}{clustenaem}(clust)
 
 \method{getclustmeans}{clustenaem}(clust)
 }
 \arguments{
-\item{mat}{matriz de dados para clusterizacao}
+\item{compact}{objeto \code{compactcen} contendo cenarios compactados para clusterizar}
 
 \item{nc}{numero de clusters}
 

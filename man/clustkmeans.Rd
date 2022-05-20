@@ -6,14 +6,14 @@
 \alias{getclustmeans.clustenakmeans}
 \title{Clusteriza Dado Por Kmeans}
 \usage{
-clustkmeans(mat, nc, nstart = 30, ...)
+clustkmeans(compact, nc, nstart = 30, ...)
 
 \method{getclustclass}{clustenakmeans}(clust)
 
 \method{getclustmeans}{clustenakmeans}(clust)
 }
 \arguments{
-\item{mat}{matriz de dados para clusterizacao}
+\item{compact}{objeto \code{compactcen} contendo cenarios compactados para clusterizar}
 
 \item{nc}{numero de clusters}
 

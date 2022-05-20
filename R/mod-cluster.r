@@ -10,11 +10,10 @@
 #' entrada e caracteristicas na saida.
 #' 
 #' Quanto as entradas, todas as funcoes de clusterizacao precisam receber o primeiro argumento 
-#' chamado \code{mat}, correspondente a uma matrix ou data.frame-like contendo observacoes a serem
-#' clusterizadas nas linhas e variaveis nas colunas (formato padrao). Alem de \code{mat}, o segundo
-#' argumento deve ser \code{nc}, recebendo um inteiro indicando o numero de clustes desejados. Os 
-#' demais argumentos sao livres, porem independentemente deles deve existir \code{...} para 
-#' consistencia com as demais funcoes.
+#' chamado \code{compact}, correspondente a um objeto \code{compactcen} observacoes a serem
+#' clusterizadas. Alem dele, o segundo argumento deve ser \code{nc}, recebendo um inteiro indicando
+#' o numero de clustes desejados. Os demais argumentos sao livres, porem independentemente deles
+#' deve existir \code{...} para consistencia com as demais funcoes.
 #' 
 #' Em seguida, as caracteristicas de saida. Todas as funcoes utilizadas para clusterizacao devem
 #' retornar um objeto com classe \code{"clustena"} e uma subclasse especifica do metodo. Por exemplo
@@ -33,7 +32,7 @@
 #' As paginas de help de cada uma das funcoes contem detalhes a respeito dos argumentos de cada uma
 #' (que podem ser passados as funcoes de selecao atraves de \code{...} naquelas chamadas).
 #' 
-#' @seealso Funcoes \code{\link{clustkmeans}} e \code{\link{clustem}} para clusterizacao
+#' @seealso Funcoes \code{\link{clustkmeans}} e \code{\link{clustEM}} para clusterizacao
 #' 
 #' @name clust_funs
 NULL
@@ -81,7 +80,7 @@ getclustclass.default <- function(clust) {
 #' 
 #' Wrapper da funcao \code{\link[stats]{kmeans}} para uso neste pacote
 #' 
-#' @param mat matriz de dados para clusterizacao
+#' @param compact objeto \code{compactcen} contendo cenarios compactados para clusterizar
 #' @param nc numero de clusters
 #' @param nstart numero de sementes para testar o kmeans
 #' @param ... demais parametros passados a funcao \code{\link[stats]{kmeans}} exceto \code{nstart}
@@ -93,7 +92,9 @@ getclustclass.default <- function(clust) {
 #' 
 #' @export
 
-clustkmeans <- function(mat, nc, nstart = 30, ...) {
+clustkmeans <- function(compact, nc, nstart = 30, ...) {
+
+    mat <- extracdims(compact)
     clusters <- kmeans(mat, nc, nstart = nstart, ...)
     clusters <- list(clusters = clusters)
     class(clusters) <- c("clustenakmeans", "clustena")
@@ -119,7 +120,7 @@ getclustmeans.clustenakmeans <- function(clust) clust[[1]]$centers
 #' 
 #' Wrapper da funcao \code{\link[mclust]{Mclust}} para uso neste pacote
 #' 
-#' @param mat matriz de dados para clusterizacao
+#' @param compact objeto \code{compactcen} contendo cenarios compactados para clusterizar
 #' @param nc numero de clusters
 #' @param ... demais parametros passados a funcao \code{\link[mclust]{Mclust}}
 #' 
@@ -128,10 +129,12 @@ getclustmeans.clustenakmeans <- function(clust) clust[[1]]$centers
 #' 
 #' @export
 
-clustEM <- function(mat, nc, ...) {
+clustEM <- function(compact, nc, ...) {
     if(!requireNamespace("mclust", quietly = TRUE)) {
         stop("Clusterizacao por EM requer o pacote 'mclust'")
     }
+
+    mat <- extracdims(compact)
 
     # tem algum problema de implementacao do mclust que a funcao mclustBIC nao e encontrada a nao
     # ser que o pacote seja explicitamente importado no NAMESPACE. Como ele e uma dependencia
@@ -159,3 +162,11 @@ getclustclass.clustenaem <- function(clust) clust[[1]]$classification
 #' @rdname clustEM
 
 getclustmeans.clustenaem <- function(clust) t(clust[[1]]$parameters$mean)
+
+# HELPERS ------------------------------------------------------------------------------------------
+
+extracdims <- function(x) {
+    x <- x$compact
+    x <- dcast(x, cenario ~ ind, value.var = "ena")[, -1]
+    return(x)
+}

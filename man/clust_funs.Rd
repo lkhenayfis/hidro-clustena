@@ -13,11 +13,10 @@ o dado podem implementar qualquer metodo, mas devem respeitar alguns padroes de 
 entrada e caracteristicas na saida.
 
 Quanto as entradas, todas as funcoes de clusterizacao precisam receber o primeiro argumento
-chamado \code{mat}, correspondente a uma matrix ou data.frame-like contendo observacoes a serem
-clusterizadas nas linhas e variaveis nas colunas (formato padrao). Alem de \code{mat}, o segundo
-argumento deve ser \code{nc}, recebendo um inteiro indicando o numero de clustes desejados. Os
-demais argumentos sao livres, porem independentemente deles deve existir \code{...} para
-consistencia com as demais funcoes.
+chamado \code{compact}, correspondente a um objeto \code{compactcen} observacoes a serem
+clusterizadas. Alem dele, o segundo argumento deve ser \code{nc}, recebendo um inteiro indicando
+o numero de clustes desejados. Os demais argumentos sao livres, porem independentemente deles
+deve existir \code{...} para consistencia com as demais funcoes.
 
 Em seguida, as caracteristicas de saida. Todas as funcoes utilizadas para clusterizacao devem
 retornar um objeto com classe \code{"clustena"} e uma subclasse especifica do metodo. Por exemplo
@@ -37,5 +36,5 @@ As paginas de help de cada uma das funcoes contem detalhes a respeito dos argume
 (que podem ser passados as funcoes de selecao atraves de \code{...} naquelas chamadas).
 }
 \seealso{
-Funcoes \code{\link{clustkmeans}} e \code{\link{clustem}} para clusterizacao
+Funcoes \code{\link{clustkmeans}} e \code{\link{clustEM}} para clusterizacao
 }

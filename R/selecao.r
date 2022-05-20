@@ -88,10 +88,7 @@ selecporcluster <- function(cenarios, nc, clust_fun = clustkmeans, ..., transfor
     compact_call <- c(list(compact_fun, cenarios), compact_args)
     compact <- eval(as.call(compact_call))
 
-    dat <- compact$compact
-    dat <- dcast(dat, cenario ~ ind, value.var = "ena")[, -1]
-
-    cluster_call <- c(list(clust_fun, dat, nc), list(...))
+    cluster_call <- c(list(clust_fun, compact, nc), list(...))
     cluster <- eval(as.call(cluster_call))
 
     if(attr(compact, "teminv") & transforma) {
