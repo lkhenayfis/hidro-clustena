@@ -1,20 +1,28 @@
 test_that("Testes de leitura e classe cenariosena", {
 
+    # Testes da classe cenariosena
+
+    testacenariosena <- function(cens) {
+        expect_equal(class(cens), "cenariosena")
+
+        expect_equal(class(cens[[1]]), c("data.table", "data.frame"))
+        expect_equal(colnames(cens[[1]]), c("anoref", "bacia", "cenario", "data", "ena"))
+
+        expect_equal(attr(cens, "bacias"), c("N", "NE", "SE", "SIN", "SUL"))
+        expect_equal(attr(cens, "datas"), seq(as.Date("2022-09-01"), as.Date("2023-12-01"), "month"))
+        expect_equal(attr(cens, "anos"), paste0("A", seq(4)))
+        expect_equal(attr(cens, "ncen"), 100)
+    }
+
     # usando arquivo interno
     arq  <- system.file("extdata/cenarios.csv", package = "clustena")
     cens <- learqcenarios(arq)
+    testacenariosena(cens)
 
-    # Testes da classe cenariosena
+    cens2 <- as.cenariosena(cens$cenarios)
+    testacenariosena(cens2)
 
-    expect_equal(class(cens), "cenariosena")
-
-    expect_equal(class(cens[[1]]), c("data.table", "data.frame"))
-    expect_equal(colnames(cens[[1]]), c("anoref", "bacia", "cenario", "data", "ena"))
-
-    expect_equal(attr(cens, "bacias"), c("N", "NE", "SE", "SIN", "SUL"))
-    expect_equal(attr(cens, "datas"), seq(as.Date("2022-09-01"), as.Date("2023-12-01"), "month"))
-    expect_equal(attr(cens, "anos"), paste0("A", seq(4)))
-    expect_equal(attr(cens, "ncen"), 100)
+    expect_true(identical(cens, cens2))
 
     # Testes de subset
 

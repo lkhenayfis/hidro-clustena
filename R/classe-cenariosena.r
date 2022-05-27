@@ -68,6 +68,28 @@ new_cenariosena <- function(dat) {
     return(out)
 }
 
+#' Conversao Para \code{cenariosena}
+#' 
+#' Converte um data.table em um objeto da classe \code{cenariosena}
+#' 
+#' \code{dat} deve ter a seguinte estrutura
+#' 
+#' | anoref | bacia | cenario | indice | valor |
+#' | :----: | :---: | :-----: | :----: | :---: |
+#' | AA     | SIN   | 1       | 1      | XXXX  | 
+#' | AA     | SIN   | 1       | 2      | XXXX  | 
+#' | AA     | SIN   | 1       | 3      | XXXX  |
+#' | AA     | SIN   | 2       | 1      | XXXX  |
+#' | AA     | SIN   | 2       | 2      | XXXX  |
+#' 
+#' @param dat data.table para converter
+#' 
+#' @return objeto da classe \code{cenariosena}
+#' 
+#' @export
+
+as.cenariosena <- function(dat) new_cenariosena(dat)
+
 # METODOS ------------------------------------------------------------------------------------------
 
 #' Subset De \code{cenariosena}
