@@ -98,13 +98,13 @@ clustkmeans <- function(compact, nc, nstart = 30, ...) {
     return(clusters)
 }
 
-#' @param clust objeto da classe \code{clustenakmeans}
+#' @param clust objeto da classe \code{kmeans}
 #' 
 #' @rdname clustkmeans
 
 getclustclass.kmeans <- function(clust) clust$cluster
 
-#' @param clust objeto da classe \code{clustenakmeans}
+#' @param clust objeto da classe \code{kmeans}
 #' 
 #' @rdname clustkmeans
 
@@ -143,17 +143,63 @@ clustEM <- function(compact, nc, ...) {
     return(clusters)
 }
 
-#' @param clust objeto da classe \code{clustenaem}
+#' @param clust objeto da classe \code{Mclust}
 #' 
 #' @rdname clustEM
 
 getclustclass.Mclust <- function(clust) clust$classification
 
-#' @param clust objeto da classe \code{clustenaem}
+#' @param clust objeto da classe \code{Mclust}
 #' 
 #' @rdname clustEM
 
 getclustmeans.Mclust <- function(clust) t(clust$parameters$mean)
+
+# HCLUST -------------------------------------------------------------------------------------------
+
+#' Clusteriza Dado Por Metodo Aglomerativo Hierarquico
+#' 
+#' Wrapper da funcao \code{\link[stats]{hclust}} para uso neste pacote
+#' 
+#' @param compact objeto \code{compactcen} contendo cenarios compactados para clusterizar
+#' @param nc numero de clusters
+#' @param distfun uma funcao que receba a matriz de dados e retorne uma medida de dissimilaridade. 
+#'     Por padrao \code{\link[stats]{dist}}
+#' @param ... demais parametros passados a funcao \code{\link[stats]{hclust}}
+#' 
+#' @return objeto \code{hclust_aug}, que e um objeto \code{hclust} com dois atributos extras: as
+#'     classificacoes do dado cortando o dendograma em \code{nc} clusters os respectivos centroides.
+#'     Para mais detalhes acerca da classe \code{hclust}, veja \code{\link[stats]{hclust}}
+#' 
+#' @export
+
+clusthierarq <- function(compact, nc, distfun = dist, ...) {
+
+    mat <- extracdims(compact)
+    dx  <- distfun(mat)
+    clusters <- hclust(dx, ...)
+
+    classes <- cutree(clusters, nc)
+    medias  <- do.call(rbind, lapply(split(mat, classes), colMeans))
+
+    class(clusters) <- c("hclust_aug", class(clusters))
+    attr(clusters, "classes") <- classes
+    attr(clusters, "medias")  <- medias
+
+    return(clusters)
+}
+
+#' @param clust objeto da classe \code{hclust_aug}
+#' 
+#' @rdname clusthierarq
+
+getclustclass.hclust_aug <- function(clust) attr(clust, "classes")
+
+#' @param clust objeto da classe \code{hclust_aug}
+#' 
+#' @rdname clusthierarq
+
+getclustmeans.hclust_aug <- function(clust) attr(clust, "medias")
 
 # HELPERS ------------------------------------------------------------------------------------------
 

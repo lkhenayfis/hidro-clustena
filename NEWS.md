@@ -11,6 +11,14 @@
     compactada igual a `Nbacias * Nquebras`
   * `PCAena` concatena os trajetos de cada bacia em uma observacao `tamanho_cen * Nbacias` e usa
     isso como dado para compactar
+* Introduz a funcao `clusthierarq` para clusterizacao na selecao/extracao de cenarios por metodos
+  aglomerativos
+
+## Bug fixes
+
+### Minor
+
+* Corrige documentacao dos metodos `getclustclass` e `getclustmeans` para `Mclust` e `kmeans`
 
 # clustena 1.0
 

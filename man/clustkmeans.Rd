@@ -21,7 +21,7 @@ clustkmeans(compact, nc, nstart = 30, ...)
 
 \item{...}{demais parametros passados a funcao \code{\link[stats]{kmeans}} exceto \code{nstart}}
 
-\item{clust}{objeto da classe \code{clustenakmeans}}
+\item{clust}{objeto da classe \code{kmeans}}
 }
 \value{
 objeto \code{kmeans} -- Veja \code{\link[stats]{kmeans}} para mais detalhes

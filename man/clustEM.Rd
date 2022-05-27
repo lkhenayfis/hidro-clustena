@@ -19,7 +19,7 @@ clustEM(compact, nc, ...)
 
 \item{...}{demais parametros passados a funcao \code{\link[mclust]{Mclust}}}
 
-\item{clust}{objeto da classe \code{clustenaem}}
+\item{clust}{objeto da classe \code{Mclust}}
 }
 \value{
 objeto \code{Mclust} -- Veja \code{\link[mclust]{Mclust}} para mais detalhes
