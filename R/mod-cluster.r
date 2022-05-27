@@ -110,6 +110,44 @@ getclustclass.kmeans <- function(clust) clust$cluster
 
 getclustmeans.kmeans <- function(clust) clust$centers
 
+# KMEDOIDES ----------------------------------------------------------------------------------------
+
+#' Clusteriza Dado Por Kmedoides
+#' 
+#' Wrapper da funcao \code{\link[cluster]{pam}} para uso neste pacote
+#' 
+#' @param compact objeto \code{compactcen} contendo cenarios compactados para clusterizar
+#' @param nc numero de clusters
+#' @param nstart numero de sementes para testar o kmeans
+#' @param ... demais parametros passados a funcao \code{\link[cluster]{pam}} exceto \code{nstart}
+#' 
+#' @return objeto \code{kmeans} -- Veja \code{\link[cluster]{pam}} para mais detalhes
+#' 
+#' @export
+
+clustkmedoids <- function(compact, nc, nstart = 30, ...) {
+
+    if(!requireNamespace("cluster", quietly = TRUE)) {
+        stop("Clusterizacao por k-medoides requer o pacote 'cluster'")
+    }
+
+    mat <- extracdims(compact)
+    clusters <- cluster::pam(mat, nc, nstart = nstart, ...)
+    return(clusters)
+}
+
+#' @param clust objeto da classe \code{pam}
+#' 
+#' @rdname clustkmedoids
+
+getclustclass.pam <- function(clust) clust$clustering
+
+#' @param clust objeto da classe \code{pam}
+#' 
+#' @rdname clustkmedoids
+
+getclustmeans.pam <- function(clust) clust$medoids
+
 # EM MIXTURE GUASS ---------------------------------------------------------------------------------
 
 #' Clusteriza Dado Por Mistura Gaussiana
@@ -205,6 +243,6 @@ getclustmeans.hclust_aug <- function(clust) attr(clust, "medias")
 
 extracdims <- function(x) {
     x <- x$compact
-    x <- dcast(x, cenario ~ ind, value.var = "ena")[, -1]
+    x <- dcast(x, cenario ~ bacia + ind, value.var = "ena")[, -1]
     return(x)
 }

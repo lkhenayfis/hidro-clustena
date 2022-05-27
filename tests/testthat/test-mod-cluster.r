@@ -37,4 +37,15 @@ test_that("Testes de clusterizacao", {
 
     gg <- plot(compac, clust, print = FALSE)
     expect_equal(class(gg), c("plotly", "htmlwidget"))
+
+    # KMEDOIDS
+
+    clust <- clustkmedoids(compac, 5)
+
+    expect_equal(class(clust), c("pam", "partition"))
+    expect_snapshot_value(getclustclass(clust), style = "deparse")
+    expect_snapshot_value(getclustmeans(clust), style = "deparse")
+
+    gg <- plot(compac, clust, print = FALSE)
+    expect_equal(class(gg), c("plotly", "htmlwidget"))
 })

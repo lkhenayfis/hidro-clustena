@@ -21,6 +21,7 @@ Imports:
     data.table (>= 1.10),
     ggplot2 (>= 3.3)
 Suggests:
+    cluster (>= 2.1),
     jsonlite (>= 1.7),
     mclust (>= 5.0),
     plotly (>= 4.0),

@@ -11,8 +11,13 @@
     compactada igual a `Nbacias * Nquebras`
   * `PCAena` concatena os trajetos de cada bacia em uma observacao `tamanho_cen * Nbacias` e usa
     isso como dado para compactar
+* `extracdims` agora considera a possibilidade de multiplas bacias no dado. A compactacao por PCA
+  naturalmente ja devolvia os cenarios no espaco reduzido considerando todas as bacias originais,
+  mas a acumulacao ainda devolvia um espaco compactado por bacia. Isto causava um erro
 * Introduz a funcao `clusthierarq` para clusterizacao na selecao/extracao de cenarios por metodos
   aglomerativos
+* Introduz a funcao `clustkmedoids` para clusterizacao na selecao/extracao de cenarios por 
+  k-medoides
 
 ## Bug fixes
 
