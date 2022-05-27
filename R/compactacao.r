@@ -58,7 +58,7 @@ PCAena <- function(cenarios, vartot = .8) {
 
     dat <- copy(cenarios$cenarios)
 
-    pca <- dcast(dat, cenario ~ data, value.var = "ena")[, -1]
+    pca <- dcast(dat, cenario ~ bacia + data, value.var = "ena")[, -1]
     pca <- prcomp(pca, scale = TRUE)
 
     if(vartot < 0) {
@@ -72,7 +72,7 @@ PCAena <- function(cenarios, vartot = .8) {
     compdat <- melt(compdat, id.vars = "cenario", variable.name = "ind", value.name = "ena")
     compdat[, ind := as.numeric(sub("[[:alpha:]]*", "", ind))]
 
-    out <- cbind(anoref = dat$anoref[1], bacia = dat$bacia[1], compdat)
+    out <- cbind(anoref = dat$anoref[1], bacia = paste0(attr(cenarios, "bacias"), collapse = "."), compdat)
     setorder(out, anoref, bacia, cenario, ind)
 
     new_compactcen(out, "PCAena", invtransfpca(pca, importance))
@@ -101,12 +101,16 @@ PCAena <- function(cenarios, vartot = .8) {
 
 acumulaena <- function(cenarios, quebras = 1L) {
 
-    ena <- NULL
+    ena <- ena2 <- NULL
 
     if(quebras < 0) quebras <- length(attr(cenarios, "datas"))
 
     dat <- copy(cenarios$cenarios)
-    dat[, ena := (ena - min(ena)) / diff(range(ena))]
+
+    # por algum motivo inexplicavel, ena := da erro mas assim funciona
+    dat[, ena2 := (ena - min(ena)) / diff(range(ena)), by = "bacia"]
+    dat[, ena := ena2]
+    dat[, ena2 := NULL]
 
     out <- dat[, list(ind = seq(quebras), ena = stepcumsum(ena, quebras)),
         by = c("anoref", "bacia", "cenario")]
