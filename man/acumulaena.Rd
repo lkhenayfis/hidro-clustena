@@ -20,11 +20,14 @@ Reducao de dimensao por ENA acumulada, possivelmente em partes crescentes
 }
 \details{
 Esta funcao reduz a dimensao de um vetor de cenarios de ENA calculando a soma acumulada do vetor,
-possivelmente em partes. Se \code{quebras = 3L}, por exemplo, a funcao quebra o cenario em tres
-partes iguais e calcula a soma de cada um. O vetor em dimensao reduzida e, entao, a soma
-acumulada destas partes.
+possivelmente em partes. Deve ser notado que, antes da compactacao, os cenarios sao escalonados
+para o intervalo \link{0, 1} de modo a obter valores de menor variancia. Esta regularizacao e feita
+por bacia individualmente. Isto objetiva determinar um espaco reduzido que capture principalmente
+o perfil de cada cenario em cada regiao, independentemente da magnitude.
 
-Por exemplo, para cenarios de um ano, indo de janeiro a dezembro, o uso de \code{quebras = 3L}
-representa o calculo da ENA acumulada ate abril, agosto e dezembro (por construcao um vetor de
-valores crescentes).
+Se \code{quebras = 3L}, por exemplo, a funcao quebra o cenario em tres
+partes iguais e calcula a soma de cada um. O vetor em dimensao reduzida e, entao, a soma
+acumulada destas partes. Para cenarios de um ano, indo de janeiro a dezembro, o uso de
+\code{quebras = 3L} representa o calculo da ENA acumulada ate abril, agosto e dezembro (por
+construcao um vetor de valores crescentes).
 }

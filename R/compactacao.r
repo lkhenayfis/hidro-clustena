@@ -40,8 +40,11 @@ NULL
 #' Reduz dimensionalidade dos cenarios via PCA mantendo um minimo de variacao total
 #' 
 #' A matriz de dados considerada para reducao de dimensionalidade tem em cada linha o cenario e,
-#' em cada coluna, os passos a frente de simulacao. Serao selecionadas as n primeiras componentes 
-#' principais que representem no minimo \code{vartot} por cento da variacao total.
+#' em cada coluna, os passos a frente de simulacao por bacia. Desta forma, cem cenarios 15 passos a
+#' frente de duas bacias corresponde a uma matriz de dados 100 por 30. Serao selecionadas as n 
+#' primeiras componentes principais que representem no minimo \code{vartot} por cento da variacao
+#' total. Deve ser observado que o dado e normalizado para media zero e variancia um antes da 
+#' compactacao.
 #' 
 #' @param cenarios objeto da classe \code{cenariosena} contendo apenas uma bacia e ano de referencia
 #' @param vartot percentual em formato decimal de variacao total mininima
@@ -83,13 +86,16 @@ PCAena <- function(cenarios, vartot = .8) {
 #' Reducao de dimensao por ENA acumulada, possivelmente em partes crescentes
 #' 
 #' Esta funcao reduz a dimensao de um vetor de cenarios de ENA calculando a soma acumulada do vetor,
-#' possivelmente em partes. Se \code{quebras = 3L}, por exemplo, a funcao quebra o cenario em tres
-#' partes iguais e calcula a soma de cada um. O vetor em dimensao reduzida e, entao, a soma 
-#' acumulada destas partes.
+#' possivelmente em partes. Deve ser notado que, antes da compactacao, os cenarios sao escalonados
+#' para o intervalo [0, 1] de modo a obter valores de menor variancia. Esta regularizacao e feita 
+#' por bacia individualmente. Isto objetiva determinar um espaco reduzido que capture principalmente
+#' o perfil de cada cenario em cada regiao, independentemente da magnitude.
 #' 
-#' Por exemplo, para cenarios de um ano, indo de janeiro a dezembro, o uso de \code{quebras = 3L}
-#' representa o calculo da ENA acumulada ate abril, agosto e dezembro (por construcao um vetor de
-#' valores crescentes).
+#' Se \code{quebras = 3L}, por exemplo, a funcao quebra o cenario em tres
+#' partes iguais e calcula a soma de cada um. O vetor em dimensao reduzida e, entao, a soma 
+#' acumulada destas partes. Para cenarios de um ano, indo de janeiro a dezembro, o uso de 
+#' \code{quebras = 3L} representa o calculo da ENA acumulada ate abril, agosto e dezembro (por 
+#' construcao um vetor de valores crescentes).
 #' 
 #' @param cenarios objeto da classe \code{cenariosena} contendo apenas uma bacia e ano de referencia
 #' @param quebras ou um inteiro indicando em quantas partes iguais separar o dado ou um vetor de 

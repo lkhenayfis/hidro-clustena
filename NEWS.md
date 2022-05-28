@@ -19,6 +19,10 @@
 * Introduz a funcao `clustkmedoids` para clusterizacao na selecao/extracao de cenarios por 
   k-medoides
 
+### Minor
+
+* Melhora documentacao de `PCAena` e `acumulaena`
+
 ## Bug fixes
 
 ### Minor

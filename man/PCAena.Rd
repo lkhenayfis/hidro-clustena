@@ -19,6 +19,9 @@ Reduz dimensionalidade dos cenarios via PCA mantendo um minimo de variacao total
 }
 \details{
 A matriz de dados considerada para reducao de dimensionalidade tem em cada linha o cenario e,
-em cada coluna, os passos a frente de simulacao. Serao selecionadas as n primeiras componentes
-principais que representem no minimo \code{vartot} por cento da variacao total.
+em cada coluna, os passos a frente de simulacao por bacia. Desta forma, cem cenarios 15 passos a
+frente de duas bacias corresponde a uma matriz de dados 100 por 30. Serao selecionadas as n
+primeiras componentes principais que representem no minimo \code{vartot} por cento da variacao
+total. Deve ser observado que o dado e normalizado para media zero e variancia um antes da
+compactacao.
 }
