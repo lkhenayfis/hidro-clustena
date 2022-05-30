@@ -46,10 +46,43 @@ NULL
 #' total. Deve ser observado que o dado e normalizado para media zero e variancia um antes da 
 #' compactacao.
 #' 
-#' @param cenarios objeto da classe \code{cenariosena} contendo apenas uma bacia e ano de referencia
+#' @param cenarios objeto da classe \code{cenariosena} contendo apenas um ano de referencia
 #' @param vartot percentual em formato decimal de variacao total mininima
 #' 
-#' @return objeto da classe \code{compactcen} contendo o dado em dimensao reduzida
+#' @return objeto da classe \code{compactcen} contendo o dado em dimensao reduzida. Este e uma lista
+#'     de um elemento nomeado \code{"compact"}, um \code{data.table} com as colunas
+#' 
+#' \describe{
+#' \item{\code{anoref}}{ano de referencia para geracao do cenario}
+#' \item{\code{bacia}}{bacia a qual a ENA corresponde}
+#' \item{\code{cenario}}{indice do cenario com respeito a bacia e ano de referencia}
+#' \item{\code{ind}}{indice do elemento no vetor de dimensao reduzida}
+#' \item{\code{ena}}{valor de energia afluente}
+#' }
+#' 
+#' Adicionalmente tem os atributos
+#' 
+#' \itemize{
+#' \item{\code{metodo}: }{string do nome da funcao chamada para compactacao}
+#' \item{\code{teminv}: }{booleano indicando se a compactacao possui inversa}
+#' \item{\code{invfunc}: }{caso tenha inversa, a funcao que recebe vetores no espaco compactado e 
+#'     retorna no espaco original}
+#' }
+#' 
+#' @examples 
+#' 
+#' # usando o dado exemplo do pacote
+#' 
+#' # a compactacao deve ser usada para cada ano de referencia individualmente
+#' cens <- cenariosdummy["A1"]
+#' 
+#' # Compactando apenas os cenarios relativos ao SIN completo
+#' cens_compact <- PCAena(cens[, "SIN"])
+#' \dontrun{
+#' plot(cens_compact)
+#' }
+#' 
+#' @seealso \code{\link{plot.compactcen}} para visualizacao das compactacoes
 #' 
 #' @export
 
@@ -87,7 +120,7 @@ PCAena <- function(cenarios, vartot = .8) {
 #' 
 #' Esta funcao reduz a dimensao de um vetor de cenarios de ENA calculando a soma acumulada do vetor,
 #' possivelmente em partes. Deve ser notado que, antes da compactacao, os cenarios sao escalonados
-#' para o intervalo [0, 1] de modo a obter valores de menor variancia. Esta regularizacao e feita 
+#' para o intervalo \eqn{[0, 1]} de modo a obter valores de menor variancia. Esta regularizacao e feita 
 #' por bacia individualmente. Isto objetiva determinar um espaco reduzido que capture principalmente
 #' o perfil de cada cenario em cada regiao, independentemente da magnitude.
 #' 
@@ -97,11 +130,44 @@ PCAena <- function(cenarios, vartot = .8) {
 #' \code{quebras = 3L} representa o calculo da ENA acumulada ate abril, agosto e dezembro (por 
 #' construcao um vetor de valores crescentes).
 #' 
-#' @param cenarios objeto da classe \code{cenariosena} contendo apenas uma bacia e ano de referencia
+#' @param cenarios objeto da classe \code{cenariosena} contendo apenas um ano de referencia
 #' @param quebras ou um inteiro indicando em quantas partes iguais separar o dado ou um vetor de 
 #'     inteiros indicando as posicoes nas quais separar
 #' 
-#' @return objeto da classe \code{compactcen} contendo o dado em dimensao reduzida
+#' @return objeto da classe \code{compactcen} contendo o dado em dimensao reduzida. Este e uma lista
+#'     de um elemento nomeado \code{"compact"}, um \code{data.table} com as colunas
+#' 
+#' \describe{
+#' \item{\code{anoref}}{ano de referencia para geracao do cenario}
+#' \item{\code{bacia}}{bacia a qual a ENA corresponde}
+#' \item{\code{cenario}}{indice do cenario com respeito a bacia e ano de referencia}
+#' \item{\code{ind}}{indice do elemento no vetor de dimensao reduzida}
+#' \item{\code{ena}}{valor de energia afluente}
+#' }
+#' 
+#' Adicionalmente tem os atributos
+#' 
+#' \itemize{
+#' \item{\code{metodo}: }{string do nome da funcao chamada para compactacao}
+#' \item{\code{teminv}: }{booleano indicando se a compactacao possui inversa}
+#' \item{\code{invfunc}: }{caso tenha inversa, a funcao que recebe vetores no espaco compactado e 
+#'     retorna no espaco original}
+#' }
+#' 
+#' @examples 
+#' 
+#' # usando o dado exemplo do pacote
+#' 
+#' # a compactacao deve ser usada para cada ano de referencia individualmente
+#' cens <- cenariosdummy["A1"]
+#' 
+#' # Compactando apenas os cenarios relativos ao SIN completo
+#' cens_compact <- acumulaena(cens[, "SIN"], quebras = 2L)
+#' \dontrun{
+#' plot(cens_compact)
+#' }
+#' 
+#' @seealso \code{\link{plot.compactcen}} para visualizacao das compactacoes
 #' 
 #' @export
 

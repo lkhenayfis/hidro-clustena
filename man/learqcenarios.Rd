@@ -40,3 +40,13 @@ O nome das colunas de cenarios nao precisa seguir esta formato, sendo possivel i
 de nome pelo argumento \code{pat_data}, que deve corresponder a uma string de formato de data.
 Neste caso, \code{pat_data = "\%m/$Y"}
 }
+\examples{
+
+# leitura do arquvo embutido no pacote
+arq <- system.file("extdata/cenarios.csv", package = "clustena")
+cens <- learqcenarios(arq)
+
+}
+\seealso{
+\code{\link{[.cenariosena}} para subset de objetos da classe \code{cenariosena}
+}

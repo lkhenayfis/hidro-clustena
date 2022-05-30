@@ -15,6 +15,34 @@
 #' @param ... objetos \code{cenariosena} opcionais com cenarios a serem plotados por cima
 #' @param print booleano indicando se o plot deve ser exibido ou retornado invisivelmente
 #' 
+#' @return objeto \code{ggplot} contendo o plot em grade dos cenarios em \code{x}, com anos de 
+#'     referencia nas colunas e bacias nas linhas
+#' 
+#' @examples
+#' 
+#' # toda a informacao em x sera plotada, incluindo anos de referencia e bacias. O controle pode
+#' # ser feito usando o subset de objetos cenariosena
+#' 
+#' \dontrun{
+#' plot(cenariosdummy)
+#' plot(cenariosdummy["A1"])
+#' plot(cenariosdummy[, c("SUL", "SE")])
+#' plot(cenariosdummy[, , seq(10, 15)])
+#' plot(cenariosdummy[, , , seq(as.Date("2022-09-01"), as.Date("2023-05-01"), by = "month")])
+#' }
+#' 
+#' # o uso do argumento ... permite realcar alguns cenarios
+#' 
+#' # por exemplo, realcando os cenarios indice 10, 15 e 20 em todos os anos e bacias
+#' \dontrun{
+#' plot(cenariosdummy, cenariosdummy[, , c(10, 15, 20)])
+#' }
+#' 
+#' # realcando 1 a 10 apenas no SUL
+#' \dontrun{
+#' plot(cenariosdummy, cenariosdummy[, "SUL", seq(10)])
+#' }
+#' 
 #' @importFrom ggplot2 ggplot aes geom_line facet_grid theme theme_bw scale_x_date
 #' @importFrom ggplot2 scale_color_discrete element_line element_text labs
 #' 
@@ -77,6 +105,22 @@ plot.cenariosena <- function(x, ..., print = TRUE) {
 #' 
 #' @return O plot das variaveis compactadas. Isto sera um objeto \code{ggplot} caso a compactacao 
 #'     tenha sido feita em uma ou duas dimensoes ou um objeto \code{plot_ly} caso em tres.
+#' 
+#' @examples 
+#' 
+#' # o tipo de saida depende do numero de dimensoes compactadas
+#' \dontrun{
+#' plot(acumulaena(cenariosdummy["A1", "SIN"])) # plot em 1d
+#' plot(acumulaena(cenariosdummy["A1", "SIN"], 2)) # plot em 2d
+#' plot(acumulaena(cenariosdummy["A1", "SIN"], 3)) # plot em 3d
+#' }
+#' 
+#' # adicionando classes de clusterizacao
+#' cens_compact <- acumulaena(cenariosdummy["A1", "SIN"], 2)
+#' clusters     <- clustkmeans(cens_compact, 3)
+#' \dontrun{
+#' plot(cens_compact, clusters)
+#' }
 #' 
 #' @importFrom ggplot2 ggplot aes geom_point scale_color_discrete theme_bw
 #' 

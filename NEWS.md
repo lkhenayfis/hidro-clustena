@@ -22,6 +22,7 @@
 ### Minor
 
 * Melhora documentacao de `PCAena` e `acumulaena`
+* Adiciona exemplos nas documentacoes do pacote
 
 ## Bug fixes
 

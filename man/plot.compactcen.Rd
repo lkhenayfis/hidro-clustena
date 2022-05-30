@@ -27,3 +27,20 @@ Esta funcao permite a visualizacao da compactacao de cenarios e resultado da clu
 ser notado que sua funcionalidade esta prevista apenas para compactacoes em ate tres dimensoes e
 retornara um erro caso seja passado \code{x} com quatro ou mais.
 }
+\examples{
+
+# o tipo de saida depende do numero de dimensoes compactadas
+\dontrun{
+plot(acumulaena(cenariosdummy["A1", "SIN"])) # plot em 1d
+plot(acumulaena(cenariosdummy["A1", "SIN"], 2)) # plot em 2d
+plot(acumulaena(cenariosdummy["A1", "SIN"], 3)) # plot em 3d
+}
+
+# adicionando classes de clusterizacao
+cens_compact <- acumulaena(cenariosdummy["A1", "SIN"], 2)
+clusters     <- clustkmeans(cens_compact, 3)
+\dontrun{
+plot(cens_compact, clusters)
+}
+
+}

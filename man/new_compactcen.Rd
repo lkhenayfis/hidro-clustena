@@ -16,7 +16,15 @@ original}
 }
 \value{
 Objeto da classe \code{compactcen}, uma lista de um emento chamado compact contendo o
-argumento \code{compact}
+argumento \code{compact}, um \code{data.table} com as colunas
+
+\describe{
+\item{\code{anoref}}{ano de referencia para geracao do cenario}
+\item{\code{bacia}}{bacia a qual a ENA corresponde}
+\item{\code{cenario}}{indice do cenario com respeito a bacia e ano de referencia}
+\item{\code{ind}}{indice do elemento no vetor de dimensao reduzida}
+\item{\code{ena}}{valor de energia afluente}
+}
 
 Adicionalmente contem os atributos
 

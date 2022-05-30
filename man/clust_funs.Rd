@@ -25,16 +25,15 @@ objetos retornados. Por exemplo, \code{clustkmeans} retorna um objeto com classe
 de modo que ha implementadas no pacote \code{getclustmeans.kmeans} e \code{getclustclass.kmeans},
 que recebem objetos dessa classe e extraem centroides e classficacoes respectivamente.
 
-Atualmente o pacote fornece duas opcoes:
+Atualmente o pacote fornece as opcoes:
 
 \itemize{
 \item{\code{\link{clustkmeans}}}
+\item{\code{\link{clustkmedoids}}}
 \item{\code{\link{clustEM}}}
+\item{\code{\link{clusthierarq}}}
 }
 
 As paginas de help de cada uma das funcoes contem detalhes a respeito dos argumentos de cada uma
 (que podem ser passados as funcoes de selecao atraves de \code{...} naquelas chamadas).
-}
-\seealso{
-Funcoes \code{\link{clustkmeans}} e \code{\link{clustEM}} para clusterizacao
 }

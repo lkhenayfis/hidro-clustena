@@ -13,6 +13,10 @@
 
 \item{print}{booleano indicando se o plot deve ser exibido ou retornado invisivelmente}
 }
+\value{
+objeto \code{ggplot} contendo o plot em grade dos cenarios em \code{x}, com anos de
+referencia nas colunas e bacias nas linhas
+}
 \description{
 Plot em grade de objetos \code{cenariosena}
 }
@@ -23,4 +27,30 @@ argumento e passar \code{cenariosena} para cada ano dos quais se tiram cenarios,
 selecao do mesmo numero de cenarios a cada ano de referencia. Assim, se existem tres anos de
 referencia, \code{...} corresponde a tres objetos \code{cenariosena} contendo cada um um unico
 ano de referencia e o mesmo numero N de cenarios selecionados.
+}
+\examples{
+
+# toda a informacao em x sera plotada, incluindo anos de referencia e bacias. O controle pode
+# ser feito usando o subset de objetos cenariosena
+
+\dontrun{
+plot(cenariosdummy)
+plot(cenariosdummy["A1"])
+plot(cenariosdummy[, c("SUL", "SE")])
+plot(cenariosdummy[, , seq(10, 15)])
+plot(cenariosdummy[, , , seq(as.Date("2022-09-01"), as.Date("2023-05-01"), by = "month")])
+}
+
+# o uso do argumento ... permite realcar alguns cenarios
+
+# por exemplo, realcando os cenarios indice 10, 15 e 20 em todos os anos e bacias
+\dontrun{
+plot(cenariosdummy, cenariosdummy[, , c(10, 15, 20)])
+}
+
+# realcando 1 a 10 apenas no SUL
+\dontrun{
+plot(cenariosdummy, cenariosdummy[, "SUL", seq(10)])
+}
+
 }

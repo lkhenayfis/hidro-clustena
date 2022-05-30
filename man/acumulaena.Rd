@@ -7,13 +7,31 @@
 acumulaena(cenarios, quebras = 1L)
 }
 \arguments{
-\item{cenarios}{objeto da classe \code{cenariosena} contendo apenas uma bacia e ano de referencia}
+\item{cenarios}{objeto da classe \code{cenariosena} contendo apenas um ano de referencia}
 
 \item{quebras}{ou um inteiro indicando em quantas partes iguais separar o dado ou um vetor de
 inteiros indicando as posicoes nas quais separar}
 }
 \value{
-objeto da classe \code{compactcen} contendo o dado em dimensao reduzida
+objeto da classe \code{compactcen} contendo o dado em dimensao reduzida. Este e uma lista
+de um elemento nomeado \code{"compact"}, um \code{data.table} com as colunas
+
+\describe{
+\item{\code{anoref}}{ano de referencia para geracao do cenario}
+\item{\code{bacia}}{bacia a qual a ENA corresponde}
+\item{\code{cenario}}{indice do cenario com respeito a bacia e ano de referencia}
+\item{\code{ind}}{indice do elemento no vetor de dimensao reduzida}
+\item{\code{ena}}{valor de energia afluente}
+}
+
+Adicionalmente tem os atributos
+
+\itemize{
+\item{\code{metodo}: }{string do nome da funcao chamada para compactacao}
+\item{\code{teminv}: }{booleano indicando se a compactacao possui inversa}
+\item{\code{invfunc}: }{caso tenha inversa, a funcao que recebe vetores no espaco compactado e
+retorna no espaco original}
+}
 }
 \description{
 Reducao de dimensao por ENA acumulada, possivelmente em partes crescentes
@@ -21,7 +39,7 @@ Reducao de dimensao por ENA acumulada, possivelmente em partes crescentes
 \details{
 Esta funcao reduz a dimensao de um vetor de cenarios de ENA calculando a soma acumulada do vetor,
 possivelmente em partes. Deve ser notado que, antes da compactacao, os cenarios sao escalonados
-para o intervalo \link{0, 1} de modo a obter valores de menor variancia. Esta regularizacao e feita
+para o intervalo \eqn{[0, 1]} de modo a obter valores de menor variancia. Esta regularizacao e feita
 por bacia individualmente. Isto objetiva determinar um espaco reduzido que capture principalmente
 o perfil de cada cenario em cada regiao, independentemente da magnitude.
 
@@ -30,4 +48,21 @@ partes iguais e calcula a soma de cada um. O vetor em dimensao reduzida e, entao
 acumulada destas partes. Para cenarios de um ano, indo de janeiro a dezembro, o uso de
 \code{quebras = 3L} representa o calculo da ENA acumulada ate abril, agosto e dezembro (por
 construcao um vetor de valores crescentes).
+}
+\examples{
+
+# usando o dado exemplo do pacote
+
+# a compactacao deve ser usada para cada ano de referencia individualmente
+cens <- cenariosdummy["A1"]
+
+# Compactando apenas os cenarios relativos ao SIN completo
+cens_compact <- acumulaena(cens[, "SIN"], quebras = 2L)
+\dontrun{
+plot(cens_compact)
+}
+
+}
+\seealso{
+\code{\link{plot.compactcen}} para visualizacao das compactacoes
 }

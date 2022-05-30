@@ -41,3 +41,20 @@ referencia e bacia. \code{quantis} deve ser um vetor indicando quais quantis est
 buscados. Por construcao e impossivel extrair exatamente estes quantis, de modo que serao
 retornados os indices dos cenarios associados aos quantis mais proximos.
 }
+\examples{
+
+# usando o dado exemplo do pacote
+
+# a selecao deve ser usada para cada ano de referencia individualmente
+cens <- cenariosdummy["A1"]
+
+# execucao simples
+selec <- selecporquantil(cens)
+
+# pegando quantis c(.33, .5, .67)
+selec <- selecporquantil(cens, c(.33, .5, .67))
+
+}
+\seealso{
+\code{\link{plot.cenariosena}} para visualizacao dos cenarios selecionados
+}

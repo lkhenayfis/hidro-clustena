@@ -25,6 +25,21 @@
 #' @return lista contendo vetor de inteiros indicando indices dos cenarios selecionados e resultado 
 #'     da compactacao
 #' 
+#' @examples 
+#' 
+#' # usando o dado exemplo do pacote
+#' 
+#' # a selecao deve ser usada para cada ano de referencia individualmente
+#' cens <- cenariosdummy["A1"]
+#' 
+#' # execucao simples
+#' selec <- selecporquantil(cens)
+#' 
+#' # pegando quantis c(.33, .5, .67)
+#' selec <- selecporquantil(cens, c(.33, .5, .67))
+#' 
+#' @seealso \code{\link{plot.cenariosena}} para visualizacao dos cenarios selecionados
+#' 
 #' @export
 
 selecporquantil <- function(cenarios, quantis = c(.25, .5, .75), compact_fun = acumulaena,
@@ -85,6 +100,40 @@ selecporquantil <- function(cenarios, quantis = c(.25, .5, .75), compact_fun = a
 #' 
 #' @return lista contendo vetor de inteiros indicando indices dos cenarios selecionados, resultado 
 #'     da compactacao e resultado da clusterizacao
+#' 
+#' @examples
+#' 
+#' # usando o dado exemplo do pacote
+#' 
+#' # a selecao deve ser usada para cada ano de referencia individualmente, para uma unica regiao
+#' # ou multiplas de forma multivariada
+#' # Usando somente o SIN completo
+#' cens <- cenariosdummy["A1", "SIN"]
+#' 
+#' # execucao simples pegando 3 clusters
+#' selec <- selecporcluster(cens, 3)
+#' 
+#' # usando diferentes funcoes de compactacao
+#' selec <- selecporcluster(cens, 3, compact_fun = acumulaena, compact_args = list(quebras = 3))
+#' selec <- selecporcluster(cens, 3, compact_fun = PCAena, compact_args = list(vartot = .7))
+#' 
+#' # usando diferentes funcoes de clusterizacao
+#' selec <- selecporcluster(cens, 3, clust_fun = clusthierarq, method = "single")
+#' 
+#' # os dois metodos seguintes precisam que os pacotes 'mclust' e 'cluster', respectivamente, 
+#' # estejam instalados
+#' \dontrun{
+#' selec <- selecporcluster(cens, 3, clust_fun = clustEM, modelNames = c("EEE", "VVV"))
+#' selec <- selecporcluster(cens, 3, clust_fun = clustkmedoids, metric = "manhattan")
+#' }
+#' 
+#' # Por fim, pode ser feita a visualizacao da escolha
+#' selec <- selecporcluster(cens, 3)
+#' \dontrun{
+#' plot(cens, cens[, , selec[[1]]])
+#' }
+#' 
+#' @seealso \code{\link{plot.cenariosena}} para visualizacao dos cenarios selecionados
 #' 
 #' @export
 

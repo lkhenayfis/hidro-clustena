@@ -29,7 +29,15 @@
 #'     descrito em Detalhes
 #' @param pat_data string indicando o formato de data dos nomes das colunas de cenario
 #' 
+#' @examples 
+#' 
+#' # leitura do arquvo embutido no pacote
+#' arq <- system.file("extdata/cenarios.csv", package = "clustena")
+#' cens <- learqcenarios(arq)
+#' 
 #' @return objeto da classe \code{cenariosena} contendo dados do arquivo lido
+#' 
+#' @seealso \code{\link{[.cenariosena}} para subset de objetos da classe \code{cenariosena}
 #' 
 #' @export
 
@@ -104,6 +112,30 @@ as.cenariosena <- function(dat) new_cenariosena(dat)
 #' @param ... nao possui uso -- existe apenas para consistencia com a generica
 #' 
 #' @return objecto \code{cenariosena} contendo apenas os valores especificados
+#' 
+#' @examples 
+#' 
+#' # utilizando o dado exemplo do pacote
+#' 
+#' # subset apenas do ano de referencia "A1"
+#' cens <- cenariosdummy["A1"]
+#' 
+#' # subset apenas da regiao "SUL"
+#' cens <- cenariosdummy[, "SUL"]
+#' 
+#' # subset dos cenarios 5, 10, 20
+#' cens <- cenariosdummy[, , c(5, 10, 20)]
+#' 
+#' # datas simuladas 2022-11-01/2023-04-01
+#' cens <- cenariosdummy[, , , seq.Date(as.Date("2022-11-01"), as.Date("2023-04-01"), by = "month")]
+#' 
+#' # ano "A2", NE e N, cenarios 10, 11, 12 nas datas 2022-09-01/2023-02-01
+#' cens <- cenariosdummy[
+#'     "A2",
+#'     c("NE", "N"),
+#'     c(10, 11, 12),
+#'     seq.Date(as.Date("2022-09-01"), as.Date("2023-02-01"), by = "month")
+#' ]
 #' 
 #' @export
 
