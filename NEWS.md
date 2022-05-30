@@ -26,6 +26,9 @@
 
 ## Bug fixes
 
+* Corrige um erro em `selecporcluster` que ocorria quando clusters tinham apenas um elemento. O 
+  calculo do elemento mais proximo dava erro em funcao da simplificacao de matriz para vetores
+
 ### Minor
 
 * Corrige documentacao dos metodos `getclustclass` e `getclustmeans` para `Mclust` e `kmeans`
